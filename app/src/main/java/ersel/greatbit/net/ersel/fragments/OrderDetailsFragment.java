@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ersel.greatbit.net.ersel.R;
+import ersel.greatbit.net.ersel.models.Shipment;
 
 
 public class OrderDetailsFragment extends Fragment {
@@ -32,12 +34,12 @@ public class OrderDetailsFragment extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
     Unbinder unbinder;
-
+    Shipment shipment;
     // TODO: Rename and change types and number of parameters
-    public static OrderDetailsFragment newInstance(String param1, String param2) {
+    public static OrderDetailsFragment newInstance(Shipment shipment) {
         OrderDetailsFragment fragment = new OrderDetailsFragment();
         Bundle args = new Bundle();
-
+        args.putSerializable("shipmentObject",shipment);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,7 +48,8 @@ public class OrderDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            shipment = (Shipment) getArguments().getSerializable("shipmentObject");
+            Log.i("shipmentObject",shipment.getClientEmail());
         }
     }
 

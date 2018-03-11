@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.fragments.LoginFragment;
+import ersel.greatbit.net.ersel.fragments.OrdersFragment;
+import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,9 +15,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.mainContent, LoginFragment.newInstance("",""), "LoginFragment")
-                .commit();
+        if(SharedPrefManager.getInstance(this).isLogin()){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.mainContent, OrdersFragment.newInstance("",""), "OrdersFragment")
+                    .commit();
+        }
+        else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.mainContent, LoginFragment.newInstance("", ""), "LoginFragment")
+                    .commit();
+        }
     }
 }

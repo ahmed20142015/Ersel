@@ -68,7 +68,7 @@ public class OrdersFragment extends Fragment {
         ordersTab.getTabAt(3).select();
 
         //replace default fragment
-        replaceFragment(new ProcessingOrdersFragment());
+        replaceFragment(ShipmentsFragment.newInstance(1));
 
         //handling tab click event
         ordersTab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -83,7 +83,7 @@ public class OrdersFragment extends Fragment {
                     replaceFragment(new ReceivedOrdersFragment());
                 }
                 else if (tab.getPosition() == 3) {
-                    replaceFragment(new ProcessingOrdersFragment());
+                    replaceFragment(ShipmentsFragment.newInstance(1));
                 }
             }
 

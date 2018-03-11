@@ -3,11 +3,13 @@ package ersel.greatbit.net.ersel.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Eslam on 3/8/2018.
  */
 
-public class Shipment {
+public class Shipment implements Serializable {
 
     @SerializedName("id")
     @Expose
