@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -95,13 +96,15 @@ public class ShipmentsFragment extends Fragment {
                     adapter.notifyDataSetChanged();
 
                 }
+                else
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
 
 
             }
 
             @Override
             public void onFailure(Call<GetShipments> call, Throwable t) {
-
+                Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
             }
         });
 

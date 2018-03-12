@@ -75,12 +75,14 @@ public class OrdersFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    replaceFragment(new UnderWaitingFragment());
+                    replaceFragment(ShipmentsFragment.newInstance(4));
+
                 } else if (tab.getPosition() == 1) {
-                    replaceFragment(new RejectedOrdersFragment());
+                    replaceFragment(ShipmentsFragment.newInstance(3));
+
                 }
                 else if (tab.getPosition() == 2) {
-                    replaceFragment(new ReceivedOrdersFragment());
+                    replaceFragment(ShipmentsFragment.newInstance(2));
                 }
                 else if (tab.getPosition() == 3) {
                     replaceFragment(ShipmentsFragment.newInstance(1));

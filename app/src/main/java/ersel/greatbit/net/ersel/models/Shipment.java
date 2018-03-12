@@ -14,48 +14,75 @@ public class Shipment implements Serializable {
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("type")
+    @Expose
+    private Integer type;
     @SerializedName("date")
     @Expose
     private String date;
     @SerializedName("trackNumber")
     @Expose
     private String trackNumber;
-    @SerializedName("shippingCost")
+    @SerializedName("cost")
     @Expose
-    private Integer shippingCost;
-    @SerializedName("totalPrice")
-    @Expose
-    private Integer totalPrice;
+    private Integer cost;
     @SerializedName("notes")
     @Expose
     private String notes;
     @SerializedName("clientId")
     @Expose
     private Integer clientId;
-    @SerializedName("employeeId")
+    @SerializedName("clientAddressId")
     @Expose
-    private Integer employeeId;
-    @SerializedName("recipientId")
+    private Integer clientAddressId;
+    @SerializedName("clientMobileId")
     @Expose
-    private Integer recipientId;
-    @SerializedName("recipientAddressId")
-    @Expose
-    private Integer recipientAddressId;
+    private Integer clientMobileId;
     @SerializedName("clientName")
     @Expose
     private String clientName;
     @SerializedName("clientEmail")
     @Expose
     private String clientEmail;
-    @SerializedName("recipientName")
+    @SerializedName("clientAddress")
     @Expose
-    private String recipientName;
+    private String clientAddress;
+    @SerializedName("clientCountryId")
+    @Expose
+    private Integer clientCountryId;
+    @SerializedName("clientCityId")
+    @Expose
+    private Integer clientCityId;
+    @SerializedName("clientAreaId")
+    @Expose
+    private Integer clientAreaId;
+    @SerializedName("clientAddressLatitude")
+    @Expose
+    private Double clientAddressLatitude;
+    @SerializedName("clientAddressLongitude")
+    @Expose
+    private Double clientAddressLongitude;
+    @SerializedName("employeeId")
+    @Expose
+    private Integer employeeId;
     @SerializedName("employeeName")
     @Expose
     private String employeeName;
     @SerializedName("employeeMobile")
     @Expose
     private String employeeMobile;
+    @SerializedName("recipientId")
+    @Expose
+    private Integer recipientId;
+    @SerializedName("recipientAddressId")
+    @Expose
+    private Integer recipientAddressId;
+    @SerializedName("recipientName")
+    @Expose
+    private String recipientName;
+    @SerializedName("recipientMobile")
+    @Expose
+    private String recipientMobile;
     @SerializedName("recipientAddressText")
     @Expose
     private String recipientAddressText;
@@ -74,12 +101,45 @@ public class Shipment implements Serializable {
     @SerializedName("recipientAddressLongitude")
     @Expose
     private Double recipientAddressLongitude;
-    @SerializedName("recipientMobile")
+    @SerializedName("name")
     @Expose
-    private String recipientMobile;
-    @SerializedName("lastShipmentStatus")
+    private String name;
+    @SerializedName("email")
     @Expose
-    private Integer lastShipmentStatus;
+    private Object email;
+    @SerializedName("mobile")
+    @Expose
+    private String mobile;
+    @SerializedName("addressText")
+    @Expose
+    private String addressText;
+    @SerializedName("addressCountryId")
+    @Expose
+    private Integer addressCountryId;
+    @SerializedName("addressCountryName")
+    @Expose
+    private String addressCountryName;
+    @SerializedName("addressCityId")
+    @Expose
+    private Integer addressCityId;
+    @SerializedName("addressCityName")
+    @Expose
+    private String addressCityName;
+    @SerializedName("addressAreaId")
+    @Expose
+    private Integer addressAreaId;
+    @SerializedName("addressAreaName")
+    @Expose
+    private String addressAreaName;
+    @SerializedName("addressLatitude")
+    @Expose
+    private Double addressLatitude;
+    @SerializedName("addressLongitude")
+    @Expose
+    private Double addressLongitude;
+    @SerializedName("lastStatus")
+    @Expose
+    private Integer lastStatus;
 
     public Integer getId() {
         return id;
@@ -87,6 +147,14 @@ public class Shipment implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getDate() {
@@ -105,20 +173,12 @@ public class Shipment implements Serializable {
         this.trackNumber = trackNumber;
     }
 
-    public Integer getShippingCost() {
-        return shippingCost;
+    public Integer getCost() {
+        return cost;
     }
 
-    public void setShippingCost(Integer shippingCost) {
-        this.shippingCost = shippingCost;
-    }
-
-    public Integer getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Integer totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 
     public String getNotes() {
@@ -137,28 +197,20 @@ public class Shipment implements Serializable {
         this.clientId = clientId;
     }
 
-    public Integer getEmployeeId() {
-        return employeeId;
+    public Integer getClientAddressId() {
+        return clientAddressId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
+    public void setClientAddressId(Integer clientAddressId) {
+        this.clientAddressId = clientAddressId;
     }
 
-    public Integer getRecipientId() {
-        return recipientId;
+    public Integer getClientMobileId() {
+        return clientMobileId;
     }
 
-    public void setRecipientId(Integer recipientId) {
-        this.recipientId = recipientId;
-    }
-
-    public Integer getRecipientAddressId() {
-        return recipientAddressId;
-    }
-
-    public void setRecipientAddressId(Integer recipientAddressId) {
-        this.recipientAddressId = recipientAddressId;
+    public void setClientMobileId(Integer clientMobileId) {
+        this.clientMobileId = clientMobileId;
     }
 
     public String getClientName() {
@@ -177,12 +229,60 @@ public class Shipment implements Serializable {
         this.clientEmail = clientEmail;
     }
 
-    public String getRecipientName() {
-        return recipientName;
+    public String getClientAddress() {
+        return clientAddress;
     }
 
-    public void setRecipientName(String recipientName) {
-        this.recipientName = recipientName;
+    public void setClientAddress(String clientAddress) {
+        this.clientAddress = clientAddress;
+    }
+
+    public Integer getClientCountryId() {
+        return clientCountryId;
+    }
+
+    public void setClientCountryId(Integer clientCountryId) {
+        this.clientCountryId = clientCountryId;
+    }
+
+    public Integer getClientCityId() {
+        return clientCityId;
+    }
+
+    public void setClientCityId(Integer clientCityId) {
+        this.clientCityId = clientCityId;
+    }
+
+    public Integer getClientAreaId() {
+        return clientAreaId;
+    }
+
+    public void setClientAreaId(Integer clientAreaId) {
+        this.clientAreaId = clientAreaId;
+    }
+
+    public Double getClientAddressLatitude() {
+        return clientAddressLatitude;
+    }
+
+    public void setClientAddressLatitude(Double clientAddressLatitude) {
+        this.clientAddressLatitude = clientAddressLatitude;
+    }
+
+    public Double getClientAddressLongitude() {
+        return clientAddressLongitude;
+    }
+
+    public void setClientAddressLongitude(Double clientAddressLongitude) {
+        this.clientAddressLongitude = clientAddressLongitude;
+    }
+
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getEmployeeName() {
@@ -199,6 +299,38 @@ public class Shipment implements Serializable {
 
     public void setEmployeeMobile(String employeeMobile) {
         this.employeeMobile = employeeMobile;
+    }
+
+    public Integer getRecipientId() {
+        return recipientId;
+    }
+
+    public void setRecipientId(Integer recipientId) {
+        this.recipientId = recipientId;
+    }
+
+    public Integer getRecipientAddressId() {
+        return recipientAddressId;
+    }
+
+    public void setRecipientAddressId(Integer recipientAddressId) {
+        this.recipientAddressId = recipientAddressId;
+    }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
+    }
+
+    public String getRecipientMobile() {
+        return recipientMobile;
+    }
+
+    public void setRecipientMobile(String recipientMobile) {
+        this.recipientMobile = recipientMobile;
     }
 
     public String getRecipientAddressText() {
@@ -249,20 +381,107 @@ public class Shipment implements Serializable {
         this.recipientAddressLongitude = recipientAddressLongitude;
     }
 
-    public String getRecipientMobile() {
-        return recipientMobile;
+    public String getName() {
+        return name;
     }
 
-    public void setRecipientMobile(String recipientMobile) {
-        this.recipientMobile = recipientMobile;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getLastShipmentStatus() {
-        return lastShipmentStatus;
+    public Object getEmail() {
+        return email;
     }
 
-    public void setLastShipmentStatus(Integer lastShipmentStatus) {
-        this.lastShipmentStatus = lastShipmentStatus;
+    public void setEmail(Object email) {
+        this.email = email;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddressText() {
+        return addressText;
+    }
+
+    public void setAddressText(String addressText) {
+        this.addressText = addressText;
+    }
+
+    public Integer getAddressCountryId() {
+        return addressCountryId;
+    }
+
+    public void setAddressCountryId(Integer addressCountryId) {
+        this.addressCountryId = addressCountryId;
+    }
+
+    public String getAddressCountryName() {
+        return addressCountryName;
+    }
+
+    public void setAddressCountryName(String addressCountryName) {
+        this.addressCountryName = addressCountryName;
+    }
+
+    public Integer getAddressCityId() {
+        return addressCityId;
+    }
+
+    public void setAddressCityId(Integer addressCityId) {
+        this.addressCityId = addressCityId;
+    }
+
+    public String getAddressCityName() {
+        return addressCityName;
+    }
+
+    public void setAddressCityName(String addressCityName) {
+        this.addressCityName = addressCityName;
+    }
+
+    public Integer getAddressAreaId() {
+        return addressAreaId;
+    }
+
+    public void setAddressAreaId(Integer addressAreaId) {
+        this.addressAreaId = addressAreaId;
+    }
+
+    public String getAddressAreaName() {
+        return addressAreaName;
+    }
+
+    public void setAddressAreaName(String addressAreaName) {
+        this.addressAreaName = addressAreaName;
+    }
+
+    public Double getAddressLatitude() {
+        return addressLatitude;
+    }
+
+    public void setAddressLatitude(Double addressLatitude) {
+        this.addressLatitude = addressLatitude;
+    }
+
+    public Double getAddressLongitude() {
+        return addressLongitude;
+    }
+
+    public void setAddressLongitude(Double addressLongitude) {
+        this.addressLongitude = addressLongitude;
+    }
+
+    public Integer getLastStatus() {
+        return lastStatus;
+    }
+
+    public void setLastStatus(Integer lastStatus) {
+        this.lastStatus = lastStatus;
+    }
 }

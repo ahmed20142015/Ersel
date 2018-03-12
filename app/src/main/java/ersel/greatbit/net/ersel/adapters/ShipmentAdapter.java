@@ -50,8 +50,8 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
         holder.clientName.setText(shipments.get(position).getClientName());
         holder.clientEmail.setText(shipments.get(position).getClientEmail());
         holder.recipientName.setText(shipments.get(position).getRecipientName());
-        holder.recipientPhoneNumber.setText(shipments.get(position).getRecipientMobile());
-        holder.shipmentAddress.setText(shipments.get(position).getRecipientAddressText());
+        holder.recipientPhoneNumber.setText(shipments.get(position).getMobile());
+        holder.shipmentAddress.setText(shipments.get(position).getAddressAreaName());
     }
 
     @Override

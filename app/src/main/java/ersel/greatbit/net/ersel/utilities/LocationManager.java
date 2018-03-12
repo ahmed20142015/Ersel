@@ -42,12 +42,15 @@ public class LocationManager {
                     new GPSTracker(mContext).getLatitude(), new GPSTracker(mContext).getLongitude());
 
             Log.w("locationservice",myLocation.toString());
-
-
+            //Send Location to server
 
         } else {
           //  new GPSTracker(mContext).showSettingsAlert();
         }
+    }
+
+    private void sendLocationToServer(){
+
     }
 
 }
