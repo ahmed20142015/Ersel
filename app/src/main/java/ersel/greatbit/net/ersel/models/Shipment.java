@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Eslam on 3/8/2018.
  */
 
-public class Shipment implements Serializable {
+public class Shipment {
 
     @SerializedName("id")
     @Expose

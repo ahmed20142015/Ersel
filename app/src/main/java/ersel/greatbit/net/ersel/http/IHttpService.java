@@ -1,7 +1,9 @@
 package ersel.greatbit.net.ersel.http;
 
+import ersel.greatbit.net.ersel.models.BaseResponse;
 import ersel.greatbit.net.ersel.models.GetShipments;
 import ersel.greatbit.net.ersel.models.LoginResponse;
+import ersel.greatbit.net.ersel.models.ShipmentDetails;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -20,4 +22,11 @@ public interface IHttpService {
 
     @GET("Shipments")
     Call<GetShipments>getShipments(@Query("status") int status);
+
+    @GET("ShipmentDetails")
+    Call<ShipmentDetails>shipmentDetails(@Query("id") int id);
+
+    @FormUrlEncoded
+    @POST("Geos")
+    Call<BaseResponse> updateLocation(@Field("latitude") double latitude, @Field("longitude") double longitude);
 }

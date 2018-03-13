@@ -85,10 +85,11 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
         @Override
         public void onClick(View view) {
            int position = getAdapterPosition();
-           Shipment shipment = shipments.get(position);
+           int shipmentId = shipments.get(position).getId();
+         //  Shipment shipment = shipments.get(position);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
                     .add(R.id.mainContent,
-                            OrderDetailsFragment.newInstance(shipment)).addToBackStack("OrderDetailsFragment").commit();
+                            OrderDetailsFragment.newInstance(shipmentId)).addToBackStack("OrderDetailsFragment").commit();
 
         }
 
