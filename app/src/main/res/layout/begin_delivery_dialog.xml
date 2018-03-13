@@ -26,6 +26,7 @@
         android:orientation="horizontal"
         >
         <Button
+            android:id="@+id/shipment_under_wating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/cardview_dark_background"
@@ -33,10 +34,11 @@
             android:textSize="18sp"
             android:text="تحت الإنتظار"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             />
 
         <Button
+            android:id="@+id/shipment_rejected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/cardview_dark_background"
@@ -44,7 +46,7 @@
             android:textSize="18sp"
             android:text="تم الرفض"
             android:layout_weight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             />
 
 

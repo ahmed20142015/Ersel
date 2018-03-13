@@ -65,7 +65,7 @@ public class LocationManager {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.isSuccessful()) {
-                    Log.w("locationservice",response.body().getStatus());
+                    Toast.makeText(mContext, "Location updated", Toast.LENGTH_SHORT).show();
                 }
                 else
                     Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();

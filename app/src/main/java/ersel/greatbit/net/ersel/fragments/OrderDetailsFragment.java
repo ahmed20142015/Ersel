@@ -1,14 +1,20 @@
 package ersel.greatbit.net.ersel.fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,10 +27,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
+import ersel.greatbit.net.ersel.models.BaseResponse;
 import ersel.greatbit.net.ersel.models.Shipment;
 import ersel.greatbit.net.ersel.models.ShipmentDetails;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
@@ -53,11 +61,17 @@ public class OrderDetailsFragment extends Fragment {
     TextView shipmentCost;
     @BindView(R.id.shipment_note)
     TextView shipmentNote;
+    @BindView(R.id.change_shipment_status)
+    Button changeShipmentStatus;
+    EditText rejectedReason;
     private GoogleMap googleMap;
     Unbinder unbinder;
     int shipmentId;
     private IHttpService iHttpService;
     private Shipment shipment;
+    String rejectReason = "";
+    int newStatus;
+
     // TODO: Rename and change types and number of parameters
     public static OrderDetailsFragment newInstance(int shipmentId) {
         OrderDetailsFragment fragment = new OrderDetailsFragment();
@@ -112,7 +126,7 @@ public class OrderDetailsFragment extends Fragment {
         unbinder.unbind();
     }
 
-    private void initMap(final double lat , final double lng) {
+    private void initMap(final double lat, final double lng) {
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -135,12 +149,12 @@ public class OrderDetailsFragment extends Fragment {
 
     }
 
-    private void getShipmentDetails(){
-        Call<ShipmentDetails> call  = iHttpService.shipmentDetails(getArguments().getInt("shipmentId"));
+    private void getShipmentDetails() {
+        Call<ShipmentDetails> call = iHttpService.shipmentDetails(getArguments().getInt("shipmentId"));
         call.enqueue(new Callback<ShipmentDetails>() {
             @Override
             public void onResponse(Call<ShipmentDetails> call, Response<ShipmentDetails> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     shipment = response.body().getShipment();
                     fillShipmentDetails();
                 }
@@ -154,7 +168,7 @@ public class OrderDetailsFragment extends Fragment {
 
     }
 
-    private void fillShipmentDetails(){
+    private void fillShipmentDetails() {
         // set client name
         detailsClientName.setText(shipment.getClientName());
         // set shipment address
@@ -162,15 +176,102 @@ public class OrderDetailsFragment extends Fragment {
         //set location on map
         double lat = shipment.getAddressLatitude();
         double lng = shipment.getAddressLongitude();
-        initMap(lat,lng);
+        initMap(lat, lng);
         //set phone numbers
         detailsFirstNumber.setText(shipment.getMobile());
         detailsSecondNumber.setText(shipment.getRecipientMobile());
         //set shipment number
         shipmentNumber.setText(shipment.getTrackNumber());
         //set shipment cost
-        shipmentCost.setText(shipment.getCost()+"");
+        shipmentCost.setText(shipment.getCost() + "");
         //set shipment note
         shipmentNote.setText(shipment.getNotes());
+    }
+
+
+    @OnClick(R.id.change_shipment_status)
+    public void onViewClicked() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View dialogView = inflater.inflate(R.layout.begin_delivery_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        Button shipmentRejected = dialogView.findViewById(R.id.shipment_rejected);
+        Button shipmentUnderWating = dialogView.findViewById(R.id.shipment_under_wating);
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.setCancelable(true);
+        alertDialog.show();
+
+        shipmentRejected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                newStatus = 4;
+                rejectedReasonDialog();
+            }
+        });
+
+        shipmentUnderWating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                newStatus = 5;
+                rejectedReasonDialog();
+            }
+        });
+    }
+
+    private void rejectedReasonDialog(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        View dialogView = inflater.inflate(R.layout.rejected_reason_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+         rejectedReason =  dialogView.findViewById(R.id.rejected_reason);
+        Button continueRejected = dialogView.findViewById(R.id.continue_reject);
+        Button cancleRejected = dialogView.findViewById(R.id.cancle_reject);
+
+
+        final AlertDialog reasonAlertDialog = dialogBuilder.create();
+        reasonAlertDialog.setCancelable(true);
+        reasonAlertDialog.show();
+
+        cancleRejected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reasonAlertDialog.dismiss();
+            }
+        });
+
+        continueRejected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reasonAlertDialog.dismiss();
+                updateStatus();
+            }
+        });
+
+    }
+
+    private void updateStatus() {
+        rejectReason = rejectedReason.getText().toString();
+        Call<BaseResponse> call = iHttpService.updateStatus(getArguments().getInt("shipmentId"),shipment.getType(),newStatus,rejectReason);
+        call.enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")){
+                    Log.w("shipment",response.body().getStatus());
+                    Toast.makeText(getActivity(), "تم تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getActivity(), "خطأ أثناء التغيير", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

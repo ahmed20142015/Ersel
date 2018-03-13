@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         // Start service every hour
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                60*1000, pintent);
+                3600000, pintent);
 
 
     }
