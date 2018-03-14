@@ -369,7 +369,7 @@
         </android.support.v7.widget.CardView>
 
         <Button
-            android:id="@+id/change_shipment_status"
+            android:id="@+id/start_delivered_shipment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="بـدأ التوصيــل"
@@ -379,7 +379,41 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:visibility="gone"
             />
+        <LinearLayout
+            android:id="@+id/wait_cancle_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <Button
+                android:id="@+id/shipment_under_wating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="تحت الإنتظار"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                />
+
+            <Button
+                android:id="@+id/shipment_rejected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="تم الرفض"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

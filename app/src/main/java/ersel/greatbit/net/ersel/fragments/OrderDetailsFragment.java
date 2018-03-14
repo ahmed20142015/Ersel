@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,9 +63,15 @@ public class OrderDetailsFragment extends Fragment {
     TextView shipmentCost;
     @BindView(R.id.shipment_note)
     TextView shipmentNote;
-    @BindView(R.id.change_shipment_status)
-    Button changeShipmentStatus;
+    @BindView(R.id.start_delivered_shipment)
+    Button startDeliveredShipment;
     EditText rejectedReason;
+    @BindView(R.id.shipment_under_wating)
+    Button shipmentUnderWating;
+    @BindView(R.id.shipment_rejected)
+    Button shipmentRejected;
+    @BindView(R.id.wait_cancle_layout)
+    LinearLayout waitCancleLayout;
     private GoogleMap googleMap;
     Unbinder unbinder;
     int shipmentId;
@@ -114,6 +122,13 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().popBackStack();
+
+                Fragment frg = null;
+                frg = getActivity().getSupportFragmentManager().findFragmentByTag("OrdersFragment");
+                final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.detach(frg);
+                ft.attach(frg);
+                ft.commit();
             }
         });
 
@@ -169,6 +184,16 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void fillShipmentDetails() {
+        if (shipment.getLastStatus() == 1){
+            startDeliveredShipment.setVisibility(View.VISIBLE);
+        }
+
+        else if(shipment.getLastStatus()== 2){
+            waitCancleLayout.setVisibility(View.VISIBLE);
+        }
+
+
+
         // set client name
         detailsClientName.setText(shipment.getClientName());
         // set shipment address
@@ -189,46 +214,45 @@ public class OrderDetailsFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.change_shipment_status)
+    @OnClick(R.id.start_delivered_shipment)
     public void onViewClicked() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-        View dialogView = inflater.inflate(R.layout.begin_delivery_dialog, null);
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.confirm_delivering_dialog, null);
         dialogBuilder.setView(dialogView);
 
-        Button shipmentRejected = dialogView.findViewById(R.id.shipment_rejected);
-        Button shipmentUnderWating = dialogView.findViewById(R.id.shipment_under_wating);
+        Button acceptDelivering = dialogView.findViewById(R.id.accept_delivering);
+        Button cancleDelivering = dialogView.findViewById(R.id.cancle_delivering);
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.setCancelable(true);
         alertDialog.show();
 
-        shipmentRejected.setOnClickListener(new View.OnClickListener() {
+        acceptDelivering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                newStatus = 2;
                 alertDialog.dismiss();
-                newStatus = 4;
-                rejectedReasonDialog();
+                updateStatus();
             }
         });
 
-        shipmentUnderWating.setOnClickListener(new View.OnClickListener() {
+        cancleDelivering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
-                newStatus = 5;
-                rejectedReasonDialog();
             }
         });
+
     }
 
-    private void rejectedReasonDialog(){
+    private void rejectedReasonDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.rejected_reason_dialog, null);
         dialogBuilder.setView(dialogView);
 
-         rejectedReason =  dialogView.findViewById(R.id.rejected_reason);
+        rejectedReason = dialogView.findViewById(R.id.rejected_reason);
         Button continueRejected = dialogView.findViewById(R.id.continue_reject);
         Button cancleRejected = dialogView.findViewById(R.id.cancle_reject);
 
@@ -255,17 +279,19 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void updateStatus() {
-        rejectReason = rejectedReason.getText().toString();
-        Call<BaseResponse> call = iHttpService.updateStatus(getArguments().getInt("shipmentId"),shipment.getType(),newStatus,rejectReason);
+        if(newStatus == 4 || newStatus == 5){
+            rejectReason = rejectedReason.getText().toString();
+        }
+
+        Call<BaseResponse> call = iHttpService.updateStatus(getArguments().getInt("shipmentId"), shipment.getType(), newStatus, rejectReason);
         call.enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")){
-                    Log.w("shipment",response.body().getStatus());
+                if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")) {
+                    Log.w("shipment", response.body().getStatus());
                     Toast.makeText(getActivity(), "تم تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(getActivity(), "خطأ أثناء التغيير", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getActivity(), "لا يمكن تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -273,5 +299,19 @@ public class OrderDetailsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.shipment_under_wating:
+                newStatus = 5;
+                rejectedReasonDialog();
+                break;
+            case R.id.shipment_rejected:
+                newStatus = 4;
+                rejectedReasonDialog();
+                break;
+        }
     }
 }

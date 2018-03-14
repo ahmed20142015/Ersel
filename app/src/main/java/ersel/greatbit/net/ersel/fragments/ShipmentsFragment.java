@@ -91,9 +91,10 @@ public class ShipmentsFragment extends Fragment {
                     for (int i=0;i<response.body().getShipments().size();i++){
                         shipments.add(response.body().getShipments().get(i));
                     }
-
-                    shipmentsList.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    if(shipments.size() > 0) {
+                        shipmentsList.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
 
                 }
                 else

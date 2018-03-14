@@ -1,21 +1,38 @@
 package ersel.greatbit.net.ersel.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import ersel.greatbit.net.ersel.R;
+import ersel.greatbit.net.ersel.http.HttpService;
+import ersel.greatbit.net.ersel.http.IHttpService;
+import ersel.greatbit.net.ersel.models.GetShipments;
+import ersel.greatbit.net.ersel.models.Shipment;
+import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class OrdersFragment extends Fragment {
@@ -27,7 +44,16 @@ public class OrdersFragment extends Fragment {
     @BindView(R.id.fragment_container)
     FrameLayout fragmentContainer;
     Unbinder unbinder;
-
+    @BindView(R.id.delivering_shipments)
+    TextView deliveringShipments;
+    @BindView(R.id.card_shipment_client_name)
+    TextView cardShipmentClientName;
+    @BindView(R.id.card_shipment_address)
+    TextView cardShipmentAddress;
+    @BindView(R.id.card_shipment_details)
+    CardView cardShipmentDetails;
+    private IHttpService iHttpService;
+    ArrayList<Shipment> deliveringShipmentItem = new ArrayList<>();
     public static OrdersFragment newInstance(String param1, String param2) {
         OrdersFragment fragment = new OrdersFragment();
         Bundle args = new Bundle();
@@ -51,22 +77,25 @@ public class OrdersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
 
         unbinder = ButterKnife.bind(this, view);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(getActivity()).getToken());
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getDeliveringShipments();
 
-        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار"));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض"));
+
+
+        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ"));
         ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام"));
-        ordersTab.addTab(ordersTab.newTab().setText("جاي التنفيذ"));
-        ordersTab.getTabAt(3).select();
+        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض"));
+        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار"));
 
+        ordersTab.getTabAt(0).select();
         //replace default fragment
         replaceFragment(ShipmentsFragment.newInstance(1));
 
@@ -75,16 +104,20 @@ public class OrdersFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    replaceFragment(ShipmentsFragment.newInstance(5));
-                } else if (tab.getPosition() == 1) {
-                    replaceFragment(ShipmentsFragment.newInstance(4));
-                }
-                else if (tab.getPosition() == 2) {
-                    replaceFragment(ShipmentsFragment.newInstance(3));
-                }
-                else if (tab.getPosition() == 3) {
                     replaceFragment(ShipmentsFragment.newInstance(1));
                 }
+//                 else if (tab.getPosition() == 1) {
+//                     replaceFragment(ShipmentsFragment.newInstance(2));
+//                 }
+                else if (tab.getPosition() == 1) {
+                    replaceFragment(ShipmentsFragment.newInstance(3));
+                } else if (tab.getPosition() == 2) {
+                    replaceFragment(ShipmentsFragment.newInstance(4));
+                } else if (tab.getPosition() == 3) {
+                    replaceFragment(ShipmentsFragment.newInstance(5));
+                }
+
+
             }
 
             @Override
@@ -100,9 +133,10 @@ public class OrdersFragment extends Fragment {
 
     }
 
+
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
 
         transaction.commit();
@@ -113,4 +147,49 @@ public class OrdersFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    @OnClick(R.id.card_shipment_details)
+    public void onViewClicked() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.mainContent,
+                        OrderDetailsFragment.newInstance(deliveringShipmentItem.get(0).getId()))
+                        .addToBackStack("OrderDetailsFragment").commit();
+    }
+
+    private void getDeliveringShipments(){
+        Call<GetShipments> call = iHttpService.getShipments(2);
+        call.enqueue(new Callback<GetShipments>() {
+            @Override
+            public void onResponse(Call<GetShipments> call, Response<GetShipments> response) {
+                if (response.isSuccessful()){
+                    for (int i=0;i<response.body().getShipments().size();i++){
+                        deliveringShipmentItem.add(response.body().getShipments().get(i));
+                    }
+                    if (deliveringShipmentItem.size() > 0){
+                        cardShipmentDetails.setVisibility(View.VISIBLE);
+                        deliveringShipments.setText("جاري تسليم شحنة :");
+                        cardShipmentClientName.setText(deliveringShipmentItem.get(0).getClientName());
+                        cardShipmentAddress.setText(deliveringShipmentItem.get(0).getAddressText());
+                    }
+                    else {
+                        deliveringShipments.setText("لا يوجد شحنات جاري تسليمها ...");
+                    }
+
+                }
+                else
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<GetShipments> call, Throwable t) {
+                Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+
 }
