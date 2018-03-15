@@ -88,12 +88,11 @@ public class OrdersFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getDeliveringShipments();
 
-
-
-        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ"));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام"));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض"));
-        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار"));
+        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ").setIcon(R.drawable.processing));
+        ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام").setIcon(R.drawable.delivered));
+        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض").setIcon(R.drawable.rejected));
+        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار").setIcon(R.drawable.on_hold));
+       // ordersTab.addTab(ordersTab.newTab().setText("تم التنفيذ").setIcon(R.drawable.completed));
 
         ordersTab.getTabAt(0).select();
         //replace default fragment

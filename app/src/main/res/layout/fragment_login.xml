@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c3c3c3"
+    android:background="#fff"
+    android:orientation="vertical"
     >
-
-
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/login_background"
+    >
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -18,29 +19,19 @@
         android:scaleType="fitCenter"
         android:layout_marginBottom="30dp"
         />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/formLogo"
-        android:id="@+id/scrollView"
-        >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/trans_white_rectangle"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E r s e l   A p p"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 android:paddingStart="10dp"
@@ -51,70 +42,78 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Just a few details to get you started"
+                android:text="Let's finish creating your account"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="15sp"
                 android:layout_marginBottom="30dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:layout_gravity="center"
                 />
+        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <AutoCompleteTextView
                 android:id="@+id/user_mobile_number"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:hint="Phone"
                 android:background="@drawable/rounded_white"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:drawableLeft="@drawable/ic_user_icon"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:drawablePadding="5dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
                 android:inputType="number"
                 />
             <AutoCompleteTextView
                 android:id="@+id/user_password"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:hint="Password"
                 android:background="@drawable/rounded_white"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:drawableLeft="@drawable/ic_pass_icon"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:drawablePadding="5dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:inputType="textPassword"
-                android:layout_marginBottom="10dp"
-
+                android:layout_marginBottom="20dp"
                 />
-
-
-
-
-            <Button
-                android:id="@+id/login"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:textColor="@color/white"
-                android:text="L O G I N"
-                android:textStyle="bold"
-                android:background="@drawable/register_button"
-                android:layout_gravity="center"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="36dp"
-                android:textSize="18sp"
-                />
-
         </LinearLayout>
+    </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
-    </ScrollView>
-
-
-</RelativeLayout>
+</LinearLayout>
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textColor="@color/white"
+        android:text="L O G I N"
+        android:textStyle="bold"
+        android:background="@drawable/login_background"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textSize="20sp"
+        />
+</LinearLayout>

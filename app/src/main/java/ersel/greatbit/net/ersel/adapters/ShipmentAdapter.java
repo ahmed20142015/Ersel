@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,12 +28,12 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
 
 
     private Context context;
-    private ArrayList<Shipment> shipments ;
+    private ArrayList<Shipment> shipments;
 
     View view;
 
 
-    public ShipmentAdapter(Context context,ArrayList<Shipment> shipments ) {
+    public ShipmentAdapter(Context context, ArrayList<Shipment> shipments) {
         this.shipments = shipments;
         this.context = context;
 
@@ -47,11 +51,40 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
 
     @Override
     public void onBindViewHolder(myviewHolder holder, int position) {
-        holder.clientName.setText(shipments.get(position).getClientName());
-        holder.clientEmail.setText(shipments.get(position).getClientEmail());
-        holder.recipientName.setText(shipments.get(position).getRecipientName());
-        holder.recipientPhoneNumber.setText(shipments.get(position).getMobile());
-        holder.shipmentAddress.setText(shipments.get(position).getAddressAreaName());
+        holder.shipmentTrackNumber.setText(shipments.get(position).getTrackNumber());
+        String dateTime = shipments.get(position).getDate();
+        String[] parts = dateTime.split("T");
+        holder.shipmentDate.setText(parts[0]);
+
+        //Input date in String format
+        String input = parts[1];
+        //Date/time pattern of input date
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        //Date/time pattern of desired output date
+        DateFormat outputformat = new SimpleDateFormat("hh:mm:ss aa");
+        Date date = null;
+        String output = null;
+        try{
+            //Conversion of input String to date
+            date= df.parse(input);
+            //old date format to new date format
+            output = outputformat.format(date);
+            holder.shipmentTime.setText(output);
+        }catch(ParseException pe){
+            pe.printStackTrace();
+        }
+
+        int type = shipments.get(position).getType();
+        if(type == 0){
+            holder.shipmentType.setText("Shipment");
+        }
+       else if(type == 1){
+            holder.shipmentType.setText("Pickup");
+        }
+
+        holder.shipmentCity.setText(shipments.get(position).getAddressCityName());
+        holder.shipmentAddress.setText(shipments.get(position).getAddressText());
+
     }
 
     @Override
@@ -63,14 +96,17 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
 
     public class myviewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.client_name)
-        TextView clientName;
-        @BindView(R.id.client_email)
-        TextView clientEmail;
-        @BindView(R.id.recipient_name)
-        TextView recipientName;
-        @BindView(R.id.recipient_phone_number)
-        TextView recipientPhoneNumber;
+
+        @BindView(R.id.shipment_track_number)
+        TextView shipmentTrackNumber;
+        @BindView(R.id.shipment_date)
+        TextView shipmentDate;
+        @BindView(R.id.shipment_time)
+        TextView shipmentTime;
+        @BindView(R.id.shipment_type)
+        TextView shipmentType;
+        @BindView(R.id.shipment_city)
+        TextView shipmentCity;
         @BindView(R.id.shipment_address)
         TextView shipmentAddress;
 
@@ -84,9 +120,9 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
 
         @Override
         public void onClick(View view) {
-           int position = getAdapterPosition();
-           int shipmentId = shipments.get(position).getId();
-         //  Shipment shipment = shipments.get(position);
+            int position = getAdapterPosition();
+            int shipmentId = shipments.get(position).getId();
+            //  Shipment shipment = shipments.get(position);
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
                     .add(R.id.mainContent,
                             OrderDetailsFragment.newInstance(shipmentId)).addToBackStack("OrderDetailsFragment").commit();

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     xmlns:Tool="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="#fafafa"
     >
 
     <LinearLayout
@@ -14,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#fff"
+
         >
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
@@ -60,18 +61,25 @@
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#fe8121"
+            >
         <TextView
             android:id="@+id/delivering_shipments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             Tool:text="جاري تسليم شحنة :"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="#000"
+            android:textSize="15sp"
+            android:textColor="#fff"
             />
         <android.support.v7.widget.CardView
             android:id="@+id/card_shipment_details"
@@ -79,20 +87,18 @@
             android:layout_height="wrap_content"
             card_view:cardElevation="2dp"
             card_view:cardCornerRadius="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginBottom="5dp"
-            card_view:contentPadding="3dp"
-            app:cardBackgroundColor="#e9e9e9"
-            android:layout_marginTop="5dp"
-            android:visibility="gone"
+            app:cardBackgroundColor="#fe8121"
+
+
+
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#fff"
-
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,9 +112,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="محمد أحمد محمد"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_weight="1"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -118,9 +124,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="العميل  :"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         />
@@ -129,29 +135,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     >
                     <TextView
                         android:id="@+id/card_shipment_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="الجيزة , الهرم"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_weight="1"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:gravity="right"
+                        android:maxLines="1"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="العنوان :"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         />
@@ -159,26 +166,36 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/orders_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            app:tabGravity="fill"
-            app:tabMode="scrollable"
-            android:scrollbars="horizontal"
-            style="@style/MyTabLayout"
-            app:tabIndicatorColor="@color/colorPrimary"
-            android:layoutDirection="rtl"
-            />
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#fff"/>
+            >
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
+                android:layout_weight="1"
+                />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/orders_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                android:scrollbars="horizontal"
+                style="@style/MyTabLayout"
+                app:tabIndicatorColor="#fe8121"
+                android:layoutDirection="rtl"
+                />
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
