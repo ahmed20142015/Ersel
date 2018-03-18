@@ -1,7 +1,10 @@
 package ersel.greatbit.net.ersel.fragments;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +27,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,20 +83,30 @@ public class OrderDetailsFragment extends Fragment {
     Button shipmentRejected;
     @BindView(R.id.wait_cancle_layout)
     LinearLayout waitCancleLayout;
+    @BindView(R.id.details_shipment_area)
+    TextView detailsShipmentArea;
+    @BindView(R.id.details_shipment_city)
+    TextView detailsShipmentCity;
+    @BindView(R.id.call_first_contact)
+    ImageView callFirstContact;
+    @BindView(R.id.call_second_contact)
+    ImageView callSecondContact;
+    @BindView(R.id.shipment_directions)
+    ImageView shipmentDirections;
     private GoogleMap googleMap;
     Unbinder unbinder;
-    int shipmentId;
+    int shipmentId, shipmentType;
     private IHttpService iHttpService;
     private Shipment shipment;
     String rejectReason = "";
     int newStatus;
 
     // TODO: Rename and change types and number of parameters
-    public static OrderDetailsFragment newInstance(int shipmentId) {
+    public static OrderDetailsFragment newInstance(int shipmentId, int shipmentType) {
         OrderDetailsFragment fragment = new OrderDetailsFragment();
         Bundle args = new Bundle();
         args.putInt("shipmentId", shipmentId);
-        // args.putSerializable("shipmentId",shipment);
+        args.putInt("shipmentType", shipmentType);
         fragment.setArguments(args);
         return fragment;
     }
@@ -94,8 +115,8 @@ public class OrderDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            // shipment = (Shipment) getArguments().getSerializable("shipmentObject");
             shipmentId = getArguments().getInt("shipmentId");
+            shipmentType = getArguments().getInt("shipmentType");
         }
     }
 
@@ -155,8 +176,9 @@ public class OrderDetailsFragment extends Fragment {
                 // For dropping a marker at a point on the Map
                 LatLng posisiabsen = new LatLng(lat, lng);
                 googleMap.addMarker(new MarkerOptions().position(posisiabsen)
-                        .title("client location"));
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(posisiabsen).zoom(17).build();
+                        .title("client location").icon(BitmapDescriptorFactory
+                                .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(posisiabsen).zoom(15).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             }
@@ -165,13 +187,14 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void getShipmentDetails() {
-        Call<ShipmentDetails> call = iHttpService.shipmentDetails(getArguments().getInt("shipmentId"));
+        Call<ShipmentDetails> call = iHttpService.shipmentDetails(getArguments().getInt("shipmentId"), getArguments().getInt("shipmentType"));
         call.enqueue(new Callback<ShipmentDetails>() {
             @Override
             public void onResponse(Call<ShipmentDetails> call, Response<ShipmentDetails> response) {
                 if (response.isSuccessful()) {
                     shipment = response.body().getShipment();
-                    fillShipmentDetails();
+                    if (shipment != null)
+                        fillShipmentDetails();
                 }
             }
 
@@ -184,19 +207,18 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void fillShipmentDetails() {
-        if (shipment.getLastStatus() == 1){
+        if (shipment.getLastStatus() == 1) {
             startDeliveredShipment.setVisibility(View.VISIBLE);
-        }
-
-        else if(shipment.getLastStatus()== 2){
+        } else if (shipment.getLastStatus() == 2) {
             waitCancleLayout.setVisibility(View.VISIBLE);
         }
-
 
 
         // set client name
         detailsClientName.setText(shipment.getClientName());
         // set shipment address
+        detailsShipmentCity.setText(shipment.getAddressCityName());
+        detailsShipmentArea.setText(shipment.getAddressAreaName());
         detailsAddress.setText(shipment.getRecipientAddressText());
         //set location on map
         double lat = shipment.getAddressLatitude();
@@ -279,7 +301,7 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void updateStatus() {
-        if(newStatus == 4 || newStatus == 5){
+        if (newStatus == 4 || newStatus == 5) {
             rejectReason = rejectedReason.getText().toString();
         }
 
@@ -301,7 +323,7 @@ public class OrderDetailsFragment extends Fragment {
         });
     }
 
-    @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected})
+    @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected, R.id.call_first_contact, R.id.call_second_contact,R.id.shipment_directions})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shipment_under_wating:
@@ -312,6 +334,62 @@ public class OrderDetailsFragment extends Fragment {
                 newStatus = 4;
                 rejectedReasonDialog();
                 break;
+            case R.id.call_first_contact:
+                if (!detailsFirstNumber.getText().equals(null)) {
+                    String uri = "tel:" + detailsFirstNumber.getText().toString();
+                    callShipmentClient(uri);
+                }
+
+                break;
+            case R.id.call_second_contact:
+                if (!detailsSecondNumber.getText().equals(null)) {
+                    String uri = "tel:" + detailsSecondNumber.getText().toString();
+                    callShipmentClient(uri);
+                }
+                break;
+            case R.id.shipment_directions:
+                double lat = shipment.getAddressLatitude();
+                double lng = shipment.getAddressLongitude();
+                String label = shipment.getClientAddress();
+                String uriBegin = "geo:" + lat + "," + lng;
+                String query = lat + "," + lng + "(" + label + ")";
+                String encodedQuery = Uri.encode(query);
+                String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+                Uri uri = Uri.parse(uriString);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                break;
+
         }
     }
+
+
+    private void callShipmentClient(final String uri) {
+        Dexter.withActivity(getActivity())
+                .withPermission(Manifest.permission.CALL_PHONE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        // check for permanent denial of permission
+                        if (response.isPermanentlyDenied()) {
+                            Toast.makeText(getActivity(), "Please enable permissions", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+
+    }
+
+
 }

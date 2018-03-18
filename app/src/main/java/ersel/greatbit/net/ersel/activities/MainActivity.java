@@ -27,6 +27,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 
@@ -39,9 +41,6 @@ import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
-    // list of permissions
-
-    ArrayList<String> permissions=new ArrayList<>();
 
     private final static int REQUEST_CHECK_SETTINGS = 2000;
     private final static int PLAY_SERVICES_REQUEST = 1000;
@@ -50,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Token is ",token);
 
        Log.w("token", SharedPrefManager.getInstance(this).getToken());
         // Request location Permission

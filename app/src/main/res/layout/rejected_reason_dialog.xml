@@ -12,20 +12,22 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="سبب الرفض"
+        android:text="سبـب الرفـــض"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_margin="20dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="@color/colorPrimaryDark"
         />
     <EditText
         android:id="@+id/rejected_reason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="سبب الرفض"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryDark"
+        android:hint="سبـب الرفــض"
 
         />
     <LinearLayout
@@ -36,25 +38,27 @@
         <Button
             android:id="@+id/cancle_reject"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/cardview_dark_background"
+            android:layout_height="40dp"
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="إلغاء"
             android:layout_weight="1"
             android:layout_margin="20dp"
+            android:background="#ffb147"
+            android:textColor="#000"
             />
 
         <Button
             android:id="@+id/continue_reject"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/cardview_dark_background"
+            android:layout_height="40dp"
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="متابعة"
             android:layout_weight="1"
             android:layout_margin="20dp"
+            android:background="#ffb147"
+            android:textColor="#000"
             />
 
 

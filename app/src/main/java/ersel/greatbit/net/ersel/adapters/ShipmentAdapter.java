@@ -113,7 +113,6 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
         public myviewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
             itemView.setOnClickListener(this);
 
         }
@@ -122,10 +121,10 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
         public void onClick(View view) {
             int position = getAdapterPosition();
             int shipmentId = shipments.get(position).getId();
-            //  Shipment shipment = shipments.get(position);
+            int shipmentType = shipments.get(position).getType();
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
                     .add(R.id.mainContent,
-                            OrderDetailsFragment.newInstance(shipmentId)).addToBackStack("OrderDetailsFragment").commit();
+                            OrderDetailsFragment.newInstance(shipmentId,shipmentType)).addToBackStack("OrderDetailsFragment").commit();
 
         }
 

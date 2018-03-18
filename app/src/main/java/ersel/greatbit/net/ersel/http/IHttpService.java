@@ -27,14 +27,11 @@ public interface IHttpService {
     Call<GetShipments>getShipments(@Query("status") int status);
 
     @GET("ShipmentDetails")
-    Call<ShipmentDetails>shipmentDetails(@Query("id") int id);
+    Call<ShipmentDetails>shipmentDetails(@Query("id") int id,@Query("type") int type);
 
     @FormUrlEncoded
     @POST("Geos")
     Call<BaseResponse> updateLocation(@Field("latitude") double latitude, @Field("longitude") double longitude);
-
-//    @PUT("ShipmentStatus/{id}/{type}/{status}/{notes}")
-//    Call<BaseResponse>updateStatus(@Path("id") int id ,@Path("type") int type ,@Path("status") int status ,@Path("notes") String notes );
 
     @FormUrlEncoded
     @HTTP(method = "PUT", path = "ShipmentStatus", hasBody = true)

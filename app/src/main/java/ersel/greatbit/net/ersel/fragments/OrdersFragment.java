@@ -1,9 +1,8 @@
 package ersel.greatbit.net.ersel.fragments;
 
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
@@ -52,8 +52,11 @@ public class OrdersFragment extends Fragment {
     TextView cardShipmentAddress;
     @BindView(R.id.card_shipment_details)
     CardView cardShipmentDetails;
+    @BindView(R.id.green_light)
+    CircleImageView greenLight;
     private IHttpService iHttpService;
     ArrayList<Shipment> deliveringShipmentItem = new ArrayList<>();
+
     public static OrdersFragment newInstance(String param1, String param2) {
         OrdersFragment fragment = new OrdersFragment();
         Bundle args = new Bundle();
@@ -88,11 +91,11 @@ public class OrdersFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getDeliveringShipments();
 
-        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ").setIcon(R.drawable.processing));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام").setIcon(R.drawable.delivered));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض").setIcon(R.drawable.rejected));
-        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار").setIcon(R.drawable.on_hold));
-       // ordersTab.addTab(ordersTab.newTab().setText("تم التنفيذ").setIcon(R.drawable.completed));
+        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ").setIcon(R.drawable.processing_tint));
+        ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام").setIcon(R.drawable.delivered_tint));
+        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض").setIcon(R.drawable.rejected_tint));
+        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار").setIcon(R.drawable.on_hold_tint));
+        // ordersTab.addTab(ordersTab.newTab().setText("تم التنفيذ").setIcon(R.drawable.completed));
 
         ordersTab.getTabAt(0).select();
         //replace default fragment
@@ -104,11 +107,7 @@ public class OrdersFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
                     replaceFragment(ShipmentsFragment.newInstance(1));
-                }
-//                 else if (tab.getPosition() == 1) {
-//                     replaceFragment(ShipmentsFragment.newInstance(2));
-//                 }
-                else if (tab.getPosition() == 1) {
+                } else if (tab.getPosition() == 1) {
                     replaceFragment(ShipmentsFragment.newInstance(3));
                 } else if (tab.getPosition() == 2) {
                     replaceFragment(ShipmentsFragment.newInstance(4));
@@ -151,31 +150,30 @@ public class OrdersFragment extends Fragment {
     public void onViewClicked() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.mainContent,
-                        OrderDetailsFragment.newInstance(deliveringShipmentItem.get(0).getId()))
-                        .addToBackStack("OrderDetailsFragment").commit();
+                        OrderDetailsFragment.newInstance(deliveringShipmentItem.get(0).getId(), deliveringShipmentItem.get(0).getType()))
+                .addToBackStack("OrderDetailsFragment").commit();
     }
 
-    private void getDeliveringShipments(){
+    private void getDeliveringShipments() {
         Call<GetShipments> call = iHttpService.getShipments(2);
         call.enqueue(new Callback<GetShipments>() {
             @Override
             public void onResponse(Call<GetShipments> call, Response<GetShipments> response) {
-                if (response.isSuccessful()){
-                    for (int i=0;i<response.body().getShipments().size();i++){
+                if (response.isSuccessful()) {
+                    for (int i = 0; i < response.body().getShipments().size(); i++) {
                         deliveringShipmentItem.add(response.body().getShipments().get(i));
                     }
-                    if (deliveringShipmentItem.size() > 0){
+                    if (deliveringShipmentItem.size() > 0) {
                         cardShipmentDetails.setVisibility(View.VISIBLE);
                         deliveringShipments.setText("جاري تسليم شحنة :");
                         cardShipmentClientName.setText(deliveringShipmentItem.get(0).getClientName());
                         cardShipmentAddress.setText(deliveringShipmentItem.get(0).getAddressText());
-                    }
-                    else {
+                    } else {
                         deliveringShipments.setText("لا يوجد شحنات جاري تسليمها ...");
+                        greenLight.setBackgroundColor(Color.parseColor("#ed0814"));
                     }
 
-                }
-                else
+                } else
                     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
 
 
@@ -188,7 +186,6 @@ public class OrdersFragment extends Fragment {
         });
 
     }
-
 
 
 }
