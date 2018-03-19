@@ -1,4 +1,4 @@
-package ersel.greatbit.net.ersel.utilities;
+package ersel.greatbit.net.ersel.location;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,8 @@ import com.google.android.gms.maps.model.LatLng;
 import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.models.BaseResponse;
+import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
+import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +31,7 @@ public class LocationManager {
     public static synchronized LocationManager getInstance(Context context){
         if(locationManager == null){
             locationManager = new LocationManager(context);
-            iHttpService = HttpService.createService(IHttpService.class,SharedPrefManager.getInstance(context).getToken());
+            iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(context).getToken());
         }
         return locationManager;
     }
@@ -53,7 +55,12 @@ public class LocationManager {
             Log.w("locationservice",myLocation.toString());
 
             //Send Location to server
-             sendLocationToServer(myLocation.latitude,myLocation.longitude);
+
+            if(ConnectionDetector.getInstance(mContext).isConnectingToInternet())
+                sendLocationToServer(myLocation.latitude,myLocation.longitude);
+            else
+                Toast.makeText(mContext, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
         } else {
           //  new GPSTracker(mContext).showSettingsAlert();
         }

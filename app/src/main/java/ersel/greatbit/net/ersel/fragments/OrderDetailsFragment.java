@@ -48,6 +48,7 @@ import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.models.BaseResponse;
 import ersel.greatbit.net.ersel.models.Shipment;
 import ersel.greatbit.net.ersel.models.ShipmentDetails;
+import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -153,7 +154,13 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
-        getShipmentDetails();
+        if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet())
+            getShipmentDetails();
+        else
+            Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
+
+
     }
 
     @Override
@@ -301,26 +308,35 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void updateStatus() {
-        if (newStatus == 4 || newStatus == 5) {
-            rejectReason = rejectedReason.getText().toString();
+
+        if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet()){
+            if (newStatus == 4 || newStatus == 5) {
+                rejectReason = rejectedReason.getText().toString();
+            }
+
+            Call<BaseResponse> call = iHttpService.updateStatus(getArguments().getInt("shipmentId"), shipment.getType(), newStatus, rejectReason);
+            call.enqueue(new Callback<BaseResponse>() {
+                @Override
+                public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                    if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")) {
+                        Log.w("shipment", response.body().getStatus());
+                        Toast.makeText(getActivity(), "تم تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(getActivity(), "لا يمكن تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<BaseResponse> call, Throwable t) {
+                    Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
 
-        Call<BaseResponse> call = iHttpService.updateStatus(getArguments().getInt("shipmentId"), shipment.getType(), newStatus, rejectReason);
-        call.enqueue(new Callback<BaseResponse>() {
-            @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")) {
-                    Log.w("shipment", response.body().getStatus());
-                    Toast.makeText(getActivity(), "تم تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
-                } else
-                    Toast.makeText(getActivity(), "لا يمكن تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
-            }
+        else
+            Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
     @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected, R.id.call_first_contact, R.id.call_second_contact,R.id.shipment_directions})

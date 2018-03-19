@@ -27,7 +27,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB1ie28qfrjinnW2CdOb0qPqy0AvmMfRG4" />
-        <service android:name=".utilities.LocationUpdateService"/>
+        <service android:name=".location.LocationUpdateService"/>
 
         <receiver android:name=".utilities.BootCompletedBroadCast" >
             <intent-filter>
@@ -41,17 +41,17 @@
             </intent-filter>
         </service>
 
-        <!--###  Register service get token and send it to service  ###-->
-        <service android:name=".firebase.FCMRegistrationService" />
+        <!--&lt;!&ndash;###  Register service get token and send it to service  ###&ndash;&gt;-->
+        <!--<service android:name=".firebase.FCMRegistrationService" />-->
 
-        <!--###  Service response to token refresh event  ###-->
-        <service
-            android:name=".firebase.FCMTokenRefreshListenerService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
+        <!--&lt;!&ndash;###  Service response to token refresh event  ###&ndash;&gt;-->
+        <!--<service-->
+            <!--android:name=".firebase.FCMTokenRefreshListenerService"-->
+            <!--android:exported="false">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
+            <!--</intent-filter>-->
+        <!--</service>-->
     </application>
 
 </manifest>

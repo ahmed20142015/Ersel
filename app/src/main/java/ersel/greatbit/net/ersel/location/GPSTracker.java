@@ -1,4 +1,4 @@
-package ersel.greatbit.net.ersel.utilities;
+package ersel.greatbit.net.ersel.location;
 
 /**
  * Created by ahmedpc on 12/5/2017.

@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import ersel.greatbit.net.ersel.location.LocationUpdateService;
+
 /**
  * Created by Eslam on 3/12/2018.
  */

@@ -24,6 +24,7 @@ import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.models.GetShipments;
 import ersel.greatbit.net.ersel.models.Shipment;
+import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,7 +74,12 @@ public class ShipmentsFragment extends Fragment {
         shipmentsList.setLayoutManager(layoutManager);
         shipmentsList.setItemAnimator(new DefaultItemAnimator());
         adapter = new ShipmentAdapter(getActivity(),shipments);
-        getShipments();
+
+        if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet())
+            getShipments();
+        else
+            Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

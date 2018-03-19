@@ -19,6 +19,7 @@ import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.models.LoginResponse;
+import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,8 +75,11 @@ public class LoginFragment extends Fragment {
         password = userPassword.getText().toString();
 
         if(mobileNumber != null && password != null){
+            if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet())
+                loginUser();
+            else
+                Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
 
-            loginUser();
         }
         else
             Toast.makeText(getActivity(), "Wrong Phone number or password", Toast.LENGTH_SHORT).show();

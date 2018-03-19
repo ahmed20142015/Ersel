@@ -29,6 +29,7 @@ import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.models.GetShipments;
 import ersel.greatbit.net.ersel.models.Shipment;
+import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,7 +90,12 @@ public class OrdersFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getDeliveringShipments();
+
+        if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet())
+            getDeliveringShipments();
+        else
+            Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+
 
         ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ").setIcon(R.drawable.processing_tint));
         ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام").setIcon(R.drawable.delivered_tint));
@@ -170,7 +176,7 @@ public class OrdersFragment extends Fragment {
                         cardShipmentAddress.setText(deliveringShipmentItem.get(0).getAddressText());
                     } else {
                         deliveringShipments.setText("لا يوجد شحنات جاري تسليمها ...");
-                        greenLight.setBackgroundColor(Color.parseColor("#ed0814"));
+                        greenLight.setImageResource(R.color.red);
                     }
 
                 } else

@@ -5,9 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -30,12 +28,10 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.util.ArrayList;
-
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.fragments.LoginFragment;
 import ersel.greatbit.net.ersel.fragments.OrdersFragment;
-import ersel.greatbit.net.ersel.utilities.LocationUpdateService;
+import ersel.greatbit.net.ersel.location.LocationUpdateService;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {

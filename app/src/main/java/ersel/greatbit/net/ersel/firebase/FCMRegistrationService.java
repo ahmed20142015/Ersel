@@ -3,12 +3,14 @@ package ersel.greatbit.net.ersel.firebase;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.models.BaseResponse;
+import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +45,10 @@ public class FCMRegistrationService  extends IntentService {
 
         // if token_sent value is false then use method sendTokenToServer to send token to server
         if (!sharedPrefManager.getSendToken())
+            if(ConnectionDetector.getInstance(this).isConnectingToInternet())
             sendTokenToServer(token);
+        else
+                Toast.makeText(this, "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -1,4 +1,4 @@
-package ersel.greatbit.net.ersel.utilities;
+package ersel.greatbit.net.ersel.location;
 
 
 import android.app.Service;
