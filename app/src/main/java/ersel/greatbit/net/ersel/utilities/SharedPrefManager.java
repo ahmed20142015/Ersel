@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 public class SharedPrefManager {
     private static final String SHARES_PREF_NAME = "sharedPref";
     private static final String KEY_TOKEN = "keytoken";
+    private static final String KEY_SEND_TOKEN = "keysendtoken";
+    private static final String KEY_REFRESH_TOKEN = "keyrefreshtoken";
     private static SharedPrefManager sharedPrefManager;
     private static Context mContext;
     SharedPreferences sharedPref ;
@@ -39,5 +41,18 @@ public class SharedPrefManager {
     public String getToken(){
         return sharedPref.getString(KEY_TOKEN,"");
     }
+
+    public void setSendToken(boolean sendToken){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(KEY_SEND_TOKEN,sendToken);
+        editor.apply();
+    }
+
+    public boolean getSendToken(){
+        return sharedPref.getBoolean(KEY_SEND_TOKEN,false);
+    }
+
+
+
 
 }

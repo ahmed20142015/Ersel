@@ -92,7 +92,7 @@ public class OrderDetailsFragment extends Fragment {
     @BindView(R.id.call_second_contact)
     ImageView callSecondContact;
     @BindView(R.id.shipment_directions)
-    ImageView shipmentDirections;
+    Button shipmentDirections;
     private GoogleMap googleMap;
     Unbinder unbinder;
     int shipmentId, shipmentType;

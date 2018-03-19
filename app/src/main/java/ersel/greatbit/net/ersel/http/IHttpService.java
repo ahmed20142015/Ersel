@@ -37,4 +37,7 @@ public interface IHttpService {
     @HTTP(method = "PUT", path = "ShipmentStatus", hasBody = true)
     Call<BaseResponse> updateStatus(@Field("id") int id,@Field("type") int type,@Field("status") int status,@Field("notes") String notes);
 
+    @FormUrlEncoded
+    @POST("SendToken")
+    Call<BaseResponse> sendTokenToServer(@Field("token") String token);
 }
