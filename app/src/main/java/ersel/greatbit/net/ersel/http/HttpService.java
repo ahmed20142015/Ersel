@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class HttpService {
-    private static final String API_BASE_URL = "http://service.ersel.net:5000/";
+    private static final String API_BASE_URL = "http://service.ersel.net/";
     private static Retrofit.Builder builder = null;
 
     static {

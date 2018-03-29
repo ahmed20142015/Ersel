@@ -35,6 +35,8 @@ public class FCMRegistrationService  extends IntentService {
         // get token from Firebase
         String token = FirebaseInstanceId.getInstance().getToken();
 
+        Log.e("Token is ",token);
+
         // check if intent is null or not if it isn't null we will ger refreshed value and
         // if its true we will override token_sent value to false and apply
         if (intent.getExtras() != null) {

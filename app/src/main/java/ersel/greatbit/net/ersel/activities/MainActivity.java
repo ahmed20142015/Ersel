@@ -1,13 +1,20 @@
 package ersel.greatbit.net.ersel.activities;
 
 import android.Manifest;
+
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,12 +33,12 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.fragments.LoginFragment;
 import ersel.greatbit.net.ersel.fragments.OrdersFragment;
 import ersel.greatbit.net.ersel.location.LocationUpdateService;
+import ersel.greatbit.net.ersel.utilities.MyJobService;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -41,16 +48,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private final static int REQUEST_CHECK_SETTINGS = 2000;
     private final static int PLAY_SERVICES_REQUEST = 1000;
 
+
+    @SuppressLint("WrongConstant")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         FirebaseApp.initializeApp(this);
-        String token = FirebaseInstanceId.getInstance().getToken();
-        Log.e("Token is ",token);
 
-       Log.w("token", SharedPrefManager.getInstance(this).getToken());
+        Log.w("token",SharedPrefManager.getInstance(this).getToken());
+
         // Request location Permission
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -74,15 +82,57 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
 
 
-        Intent intent = new Intent(this, LocationUpdateService.class);
+      //   Init location service
+        final Intent intent = new Intent(this, LocationUpdateService.class);
         PendingIntent pintent = PendingIntent
                 .getService(this, 0, intent, 0);
 
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         // Start service every hour
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                3600000, pintent);
+                10000, pintent);
 
+
+
+
+//        ComponentName componentName = new ComponentName(this, MyJobService.class);
+//        JobInfo jobInfo =
+//                new JobInfo.Builder(1, componentName).setPeriodic(5000).build();
+//    /*
+//     * setPeriodic(long intervalMillis)
+//     * Specify that this job should recur with the provided interval,
+//     * not more than once per period.
+//     */
+//        JobScheduler jobScheduler = (JobScheduler)getSystemService(JOB_SCHEDULER_SERVICE);
+//        int jobId = jobScheduler.schedule(jobInfo);
+//        if(jobScheduler.schedule(jobInfo)>0){
+//            Toast.makeText(MainActivity.this,
+//                    "Successfully scheduled job: " + jobId,
+//                    Toast.LENGTH_SHORT).show();
+//        }else{
+//            Toast.makeText(MainActivity.this,
+//                    "RESULT_FAILURE: " + jobId,
+//                    Toast.LENGTH_SHORT).show();
+//        }
+
+//        final Handler handler = new Handler();
+//         Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                startService(intent);
+//                handler.postDelayed(this, 5000);
+//            }
+//        };
+//        handler.postDelayed(runnable, 5000);
+
+
+
+
+        // register broadcast
+//        BootCompletedBroadCast bootCompletedBroadCast = new BootCompletedBroadCast();
+//        IntentFilter filter = new IntentFilter("android.intent.action.BOOT_COMPLETED");
+//        this.registerReceiver(bootCompletedBroadCast, filter);
 
     }
 

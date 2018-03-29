@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import ersel.greatbit.net.ersel.location.LocationUpdateService;
 
@@ -13,6 +15,7 @@ import ersel.greatbit.net.ersel.location.LocationUpdateService;
  */
 
 public class BootCompletedBroadCast extends BroadcastReceiver {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent i = new Intent(context, LocationUpdateService.class);
@@ -20,8 +23,8 @@ public class BootCompletedBroadCast extends BroadcastReceiver {
                 .getService(context, 0, i, 0);
 
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        // Start service every hour
+        // Start service every minitue
         alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                36*10, pintent);
+                5000, pintent);
     }
 }
