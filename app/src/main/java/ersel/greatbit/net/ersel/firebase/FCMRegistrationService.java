@@ -61,7 +61,6 @@ public class FCMRegistrationService  extends IntentService {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")){
-                    Log.w("status",response.body().getStatus());
                     sharedPrefManager.setSendToken(true);
                     Log.e("Registration Service", "Response : Send Token Success");
                     stopSelf();

@@ -2,15 +2,11 @@ package ersel.greatbit.net.ersel.location;
 
 
 import android.app.Service;
-
 import android.content.Intent;
-
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-
 import android.support.annotation.Nullable;
- import android.util.Log;
+import android.util.Log;
 
 
 /**
