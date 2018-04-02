@@ -32,23 +32,20 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"
 
                 >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="left"
 
-                    >
 
                     <ImageView
-                        android:id="@+id/open_drawer"
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/menu_tool_bar"
-
+                        android:id="@+id/logout_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/logout"
+                        android:layout_gravity="end"
+                        android:tint="#fff"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
                         />
 
-                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,6 +54,7 @@
                     android:text="Ersel"
                     android:textStyle="bold"
                     android:textSize="20sp"
+                    android:textColor="@color/white"
                     />
 
             </android.support.v7.widget.Toolbar>
@@ -66,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#fe8121"
+            android:background="@color/colorPrimary"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-
+                android:clickable="false"
                 android:layout_weight="1"
                 />
 
@@ -207,8 +205,8 @@
                 app:tabMode="fixed"
                 android:scrollbars="horizontal"
                 style="@style/MyTabLayout"
-                app:tabIndicatorColor="#fe8121"
-                app:tabSelectedTextColor="#fe8121"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorPrimary"
                 android:layoutDirection="rtl"
                 />
         </LinearLayout>

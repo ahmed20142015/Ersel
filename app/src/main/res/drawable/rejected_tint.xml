@@ -3,7 +3,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:tint="#fe5f29"
+            android:tint="@color/colorPrimary"
             android:src="@drawable/rejected"/>
     </item>
 </layer-list>

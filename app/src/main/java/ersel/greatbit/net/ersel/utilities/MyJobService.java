@@ -11,6 +11,9 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.Toast;
 
+import ersel.greatbit.net.ersel.location.LocationManager;
+import ersel.greatbit.net.ersel.location.LocationUpdateService;
+
 //Require API Level 21
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
@@ -20,14 +23,11 @@ public class MyJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
+        LocationManager manager = LocationManager.getInstance(MyJobService.this);
+        manager.findMyLocation();
         Toast.makeText(this,
-                "MyJobService.onStartJob()",
+                "My Job Service Started",
                 Toast.LENGTH_SHORT).show();
-  /*
-   * True - if your service needs to process
-   * the work (on a separate thread).
-   * False - if there's no more work to be done for this job.
-   */
         return false;
     }
 

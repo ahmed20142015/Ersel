@@ -38,6 +38,6 @@ public interface IHttpService {
     Call<BaseResponse> updateStatus(@Field("id") int id,@Field("type") int type,@Field("status") int status,@Field("notes") String notes);
 
     @FormUrlEncoded
-    @POST("SendToken")
+    @HTTP(method = "PUT", path = "Notifications", hasBody = true)
     Call<BaseResponse> sendTokenToServer(@Field("token") String token);
 }

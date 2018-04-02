@@ -15,16 +15,18 @@ import ersel.greatbit.net.ersel.location.LocationUpdateService;
  */
 
 public class BootCompletedBroadCast extends BroadcastReceiver {
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent i = new Intent(context, LocationUpdateService.class);
-        PendingIntent pintent = PendingIntent
-                .getService(context, 0, i, 0);
 
-        AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        // Start service every minitue
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                5000, pintent);
+        if(SharedPrefManager.getInstance(context).isLogin()) {
+            final Intent i = new Intent(context, LocationUpdateService.class);
+            Integer api = Integer.valueOf(Build.VERSION.SDK);
+            if(api > 25)
+                context.startForegroundService(i);
+            else
+                context.startService(i);
+        }
     }
 }

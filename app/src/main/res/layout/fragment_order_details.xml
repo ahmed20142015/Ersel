@@ -9,6 +9,11 @@
     xmlns:Tool="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="#fafafa">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <LinearLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,6 +47,7 @@
                     android:text="Ersel"
                     android:textStyle="bold"
                     android:textSize="20sp"
+                    android:textColor="#fff"
                     />
 
             </android.support.v7.widget.Toolbar>
@@ -82,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     Tool:text=" محمد أحمد محمد"
-                    android:textColor="#ffb147"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:layout_weight="1"
@@ -125,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     Tool:text="الهرم"
-                    android:textColor="#ffb147"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:layout_weight="1"
@@ -137,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" - "
-                    android:textColor="#ffb147"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginStart="5dp"
@@ -147,8 +153,8 @@
                     android:id="@+id/details_shipment_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الجيزة"
-                    android:textColor="#ffb147"
+                    Tool:text="الجيزة"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginStart="5dp"
@@ -162,7 +168,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 Tool:text="شارع الحمد متفرع من شارع الهرم عماير جاردينيا"
-                android:textColor="#ffb147"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:layout_marginStart="5dp"
@@ -255,7 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     Tool:text="0101548554"
-                    android:textColor="#ffb147"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:layout_weight="1"
@@ -279,7 +285,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#ffb147"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="3dp"
@@ -310,7 +316,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     Tool:text="0101548554"
-                    android:textColor="#ffb147"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:layout_weight="1"
@@ -383,7 +389,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         Tool:text="0554"
-                        android:textColor="#ffb147"
+                        android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
                         android:textSize="17sp"
                         android:layout_weight="1"
@@ -415,7 +421,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         Tool:text="554"
-                        android:textColor="#ffb147"
+                        android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
                         android:textSize="17sp"
                         android:layout_weight="1"
@@ -481,7 +487,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 Tool:text="أي ملااااااااااااااحظااات"
-                android:textColor="#ffb147"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:layout_marginStart="5dp"
@@ -504,7 +510,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:visibility="gone"
-            android:background="#ffb147"
+            android:background="@color/colorPrimary"
             android:textColor="#fff"
             />
         <LinearLayout
@@ -526,7 +532,7 @@
                 android:text="تحت الإنتظار"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
-                android:background="#ffb147"
+                android:background="@color/colorPrimary"
                 android:textColor="#fff"
                 android:layout_marginRight="5dp"
                 />
@@ -540,7 +546,7 @@
                 android:text="تم الرفض"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
-                android:background="#ffb147"
+                android:background="@color/colorPrimary"
                 android:textColor="#fff"
                 android:layout_marginLeft="5dp"
                 />
@@ -549,5 +555,17 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/shipment_details_progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        android:max="100"
+        android:progress="20"/>
+
+</FrameLayout>
 
 </ScrollView>

@@ -31,7 +31,7 @@ public class FCMRegistrationService  extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        iHttpService = HttpService.createService(IHttpService.class);
+        iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(this).getToken());
         // get token from Firebase
         String token = FirebaseInstanceId.getInstance().getToken();
 
@@ -46,7 +46,7 @@ public class FCMRegistrationService  extends IntentService {
         }
 
         // if token_sent value is false then use method sendTokenToServer to send token to server
-        if (!sharedPrefManager.getSendToken())
+        if (!sharedPrefManager.getSendToken() && sharedPrefManager.isLogin())
             if(ConnectionDetector.getInstance(this).isConnectingToInternet())
             sendTokenToServer(token);
         else
@@ -55,19 +55,20 @@ public class FCMRegistrationService  extends IntentService {
 
 
     // method use volley to send token to server and stop the service when done or error happened
-    private void sendTokenToServer(final String token) {
+    public void sendTokenToServer(final String token) {
         Call<BaseResponse> call = iHttpService.sendTokenToServer(token);
         call.enqueue(new Callback<BaseResponse>() {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")){
+                    Log.w("status",response.body().getStatus());
                     sharedPrefManager.setSendToken(true);
                     Log.e("Registration Service", "Response : Send Token Success");
                     stopSelf();
                 }
                 else {
                     sharedPrefManager.setSendToken(false);
-                    Log.e("Registration Service", "Response : Send Token Failed");
+                    Log.e("Registration Service", "Response : Send Token error");
                     stopSelf();
                 }
             }

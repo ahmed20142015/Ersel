@@ -15,8 +15,6 @@ public class FCMTokenRefreshListenerService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
 
-
-
         Intent intent = new Intent(this, FCMRegistrationService.class);
         intent.putExtra("refreshed", true);
         startService(intent);

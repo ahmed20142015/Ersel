@@ -56,8 +56,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
-
-        Log.w("token",SharedPrefManager.getInstance(this).getToken());
+ //        Log.w("token",SharedPrefManager.getInstance(this).getToken());
 
         // Request location Permission
         ActivityCompat.requestPermissions(MainActivity.this,
@@ -82,19 +81,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
 
 
-      //   Init location service
-        final Intent intent = new Intent(this, LocationUpdateService.class);
-        PendingIntent pintent = PendingIntent
-                .getService(this, 0, intent, 0);
-
-        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        // Start service every hour
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                10000, pintent);
-
-
+//      //   Init location service
+//        final Intent intent = new Intent(this, LocationUpdateService.class);
+//        PendingIntent pintent = PendingIntent
+//                .getService(this, 0, intent, 0);
+//
+//           alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        // Start service every hour
+//        alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+//                10000, pintent);
 
 
+
+//
 //        ComponentName componentName = new ComponentName(this, MyJobService.class);
 //        JobInfo jobInfo =
 //                new JobInfo.Builder(1, componentName).setPeriodic(5000).build();

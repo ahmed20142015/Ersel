@@ -31,7 +31,7 @@ public class LocationManager {
     public static synchronized LocationManager getInstance(Context context){
         if(locationManager == null){
             locationManager = new LocationManager(context);
-            iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(context).getToken());
+
         }
         return locationManager;
     }
@@ -67,6 +67,7 @@ public class LocationManager {
     }
 
     private void sendLocationToServer(double lat , double lng){
+        iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(mContext).getToken());
         Call<BaseResponse> call = iHttpService.updateLocation(lat,lng);
         call.enqueue(new Callback<BaseResponse>() {
             @Override

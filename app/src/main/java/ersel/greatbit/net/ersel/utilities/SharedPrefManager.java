@@ -39,7 +39,7 @@ public class SharedPrefManager {
     }
 
     public String getToken(){
-        return sharedPref.getString(KEY_TOKEN,"");
+        return sharedPref.getString(KEY_TOKEN,null);
     }
 
     public void setSendToken(boolean sendToken){
