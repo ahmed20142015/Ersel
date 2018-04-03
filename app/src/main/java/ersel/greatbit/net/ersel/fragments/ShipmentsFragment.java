@@ -92,18 +92,23 @@ public class ShipmentsFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         shipmentsList.setLayoutManager(layoutManager);
         shipmentsList.setItemAnimator(new DefaultItemAnimator());
         adapter = new ShipmentAdapter(getActivity(), shipments);
-
         if (ConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
             getShipments();
             getDeliveringShipments();
         } else
             Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         refreshLayout.setColorSchemeResources(
                 R.color.colorPrimary,

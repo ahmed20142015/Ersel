@@ -34,8 +34,8 @@
             android:text="رفـض"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:background="#ffb147"
-            android:textColor="#000"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
             />
 
         <Button
@@ -47,8 +47,8 @@
             android:text="قبـول"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:background="#ffb147"
-            android:textColor="#000"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
             />
 
 

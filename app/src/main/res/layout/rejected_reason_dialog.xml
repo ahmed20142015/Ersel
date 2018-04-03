@@ -44,8 +44,8 @@
             android:text="إلغاء"
             android:layout_weight="1"
             android:layout_margin="20dp"
-            android:background="#ffb147"
-            android:textColor="#000"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
             />
 
         <Button
@@ -57,8 +57,8 @@
             android:text="متابعة"
             android:layout_weight="1"
             android:layout_margin="20dp"
-            android:background="#ffb147"
-            android:textColor="#000"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
             />
 
 

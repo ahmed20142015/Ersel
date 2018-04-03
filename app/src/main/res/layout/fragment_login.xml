@@ -27,10 +27,9 @@
         android:layout_height="100dp"
         android:id="@+id/formLogo"
         android:src="@drawable/logo_big"
-        android:scaleType="fitCenter"
-
         android:layout_marginTop="20dp"
         android:tint="@color/white"
+        
         />
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:foregroundGravity="center"
         >
 
             <LinearLayout

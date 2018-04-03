@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="another_layout" type="layout">@layout/fragment_login</item>
+    //logo
+    <dimen name="logo_height">150dp</dimen>
+    <dimen name="logo_margin">30dp</dimen>
+    // layout
+    <dimen name="margin_se">40dp</dimen>
+    //ersel
+    <dimen name="ersel_text_size">30sp</dimen>
+    <dimen name="ersel_padding">20dp</dimen>
+    <dimen name="ersel_margin">10dp</dimen>
+    //finish create
+    <dimen name="finish_text_size">120sp</dimen>
+    <dimen name="finish_padding">15dp</dimen>
+    <dimen name="finish_margin">30dp</dimen>
+    //card
+    <dimen name="card_margin">40dp</dimen>
+    //input
+    <dimen name="input_height">60dp</dimen>
+    <dimen name="input_margin_se">20dp</dimen>
+    <dimen name="input_text_size">25sp</dimen>
+    <dimen name="input_draw_padding">10dp</dimen>
+    <dimen name="input_padding_se">20dp</dimen>
+    <dimen name="input_margin_bottom">30dp</dimen>
+    //login
+    <dimen name="login_height">70dp</dimen>
+    <dimen name="login_text_size">30sp</dimen>
+</resources>

@@ -10,9 +10,12 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,9 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,8 +54,11 @@ public class OrdersFragment extends Fragment {
     Toolbar toolbar;
     @BindView(R.id.orders_tab)
     TabLayout ordersTab;
-    @BindView(R.id.fragment_container)
-    FrameLayout fragmentContainer;
+//    @BindView(R.id.fragment_container)
+//    LinearLayout fragmentContainer;
+    @BindView(R.id.main_tab_content)
+    ViewPager viewPager;
+
     Unbinder unbinder;
 
 
@@ -98,55 +107,93 @@ public class OrdersFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ").setIcon(R.drawable.processing_tint));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام").setIcon(R.drawable.delivered_tint));
-        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض").setIcon(R.drawable.rejected_tint));
-        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار").setIcon(R.drawable.on_hold_tint));
-        // ordersTab.addTab(ordersTab.newTab().setText("تم التنفيذ").setIcon(R.drawable.completed));
-
+        setupViewPager(viewPager);
+        ordersTab.setupWithViewPager(viewPager);
+        ordersTab.getTabAt(0).setText("جاري التنفيذ").setIcon(R.drawable.processing_tint);
+        ordersTab.getTabAt(1).setText("تم الإستلام").setIcon(R.drawable.delivered_tint);
+        ordersTab.getTabAt(2).setText("تم الرفض").setIcon(R.drawable.rejected_tint);
+        ordersTab.getTabAt(3).setText("تحت الإنتظار").setIcon(R.drawable.on_hold_tint);
         ordersTab.getTabAt(0).select();
-        //replace default fragment
-        replaceFragment(ShipmentsFragment.newInstance(1));
-
-        //handling tab click event
-        ordersTab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    replaceFragment(ShipmentsFragment.newInstance(1));
-                } else if (tab.getPosition() == 1) {
-                    replaceFragment(ShipmentsFragment.newInstance(3));
-                } else if (tab.getPosition() == 2) {
-                    replaceFragment(ShipmentsFragment.newInstance(4));
-                } else if (tab.getPosition() == 3) {
-                    replaceFragment(ShipmentsFragment.newInstance(5));
-                }
-
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+//        ordersTab.addTab(ordersTab.newTab().setText("جاري التنفيذ").setIcon(R.drawable.processing_tint));
+//        ordersTab.addTab(ordersTab.newTab().setText("تم الإستلام").setIcon(R.drawable.delivered_tint));
+//        ordersTab.addTab(ordersTab.newTab().setText("تم الرفض").setIcon(R.drawable.rejected_tint));
+//        ordersTab.addTab(ordersTab.newTab().setText("تحت الإنتظار").setIcon(R.drawable.on_hold_tint));
+//        // ordersTab.addTab(ordersTab.newTab().setText("تم التنفيذ").setIcon(R.drawable.completed));
+//
+//        ordersTab.getTabAt(0).select();
+//        //replace default fragment
+//        replaceFragment(ShipmentsFragment.newInstance(1));
+//
+//        //handling tab click event
+//        ordersTab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                if (tab.getPosition() == 0) {
+//                    replaceFragment(ShipmentsFragment.newInstance(1));
+//                } else if (tab.getPosition() == 1) {
+//                    replaceFragment(ShipmentsFragment.newInstance(3));
+//                } else if (tab.getPosition() == 2) {
+//                    replaceFragment(ShipmentsFragment.newInstance(4));
+//                } else if (tab.getPosition() == 3) {
+//                    replaceFragment(ShipmentsFragment.newInstance(5));
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
     }
 
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-
-        transaction.commit();
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        adapter.insertNewFragment(ShipmentsFragment.newInstance(1));
+        adapter.insertNewFragment(ShipmentsFragment.newInstance(3));
+        adapter.insertNewFragment(ShipmentsFragment.newInstance(4));
+        adapter.insertNewFragment(ShipmentsFragment.newInstance(5));
+       // viewPager.setOffscreenPageLimit(1);
+        viewPager.setAdapter(adapter);
     }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void insertNewFragment(Fragment fragment) {
+            mFragmentList.add(fragment);
+        }
+    }
+
+
+
+//    private void replaceFragment(Fragment fragment) {
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.fragment_container, fragment);
+//
+//        transaction.commit();
+//    }
 
     @Override
     public void onDestroyView() {
