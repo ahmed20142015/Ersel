@@ -23,10 +23,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="23dp"
-            android:layout_marginEnd="23dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_23sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             >
 
             <TextView
@@ -35,16 +35,16 @@
                 android:layout_height="wrap_content"
                 Tool:text="جاري تسليم شحنة :"
                 android:textStyle="bold"
-                android:textSize="15sp"
+                android:textSize="@dimen/_14sdp"
                 android:textColor="#fff"
                 android:layout_weight="1"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/green_light"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
                 android:layout_gravity="center|right"
                 android:gravity="center"
                 android:src="#09ed20"
@@ -55,11 +55,11 @@
             android:id="@+id/card_shipment_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="2dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp"
+            card_view:cardElevation="@dimen/_2sdp"
+            card_view:cardCornerRadius="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             app:cardBackgroundColor="@color/colorPrimary"
             android:visibility="gone"
             >
@@ -82,10 +82,10 @@
                         android:text="محمد أحمد محمد"
                         android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/_13sdp"
                         android:layout_weight="1"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:gravity="right"
                         />
                     <TextView
@@ -94,17 +94,17 @@
                         android:text="العميل  :"
                         android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     >
                     <TextView
                         android:id="@+id/card_shipment_address"
@@ -113,10 +113,10 @@
                         android:text="الجيزة , الهرم"
                         android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/_13sdp"
                         android:layout_weight="1"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:gravity="right"
                         android:maxLines="1"
                         />
@@ -126,9 +126,9 @@
                         android:text="العنوان :"
                         android:textColor="#fff"
                         android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -143,13 +143,13 @@
         android:id="@+id/shipments_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/_5sdp"
         android:orientation="vertical"
         />
         <ProgressBar
             android:id="@+id/shipments_progress"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             style="?android:attr/progressBarStyleSmall"
             android:layout_gravity="center"
             android:indeterminateDrawable="@drawable/progress_bar"

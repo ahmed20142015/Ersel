@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +74,13 @@ public class OrderDetailsFragment extends Fragment {
     TextView shipmentNumber;
     @BindView(R.id.shipment_cost)
     TextView shipmentCost;
+
+    @BindView(R.id.deliver_cost)
+    TextView deliverCost;
+
+    @BindView(R.id.total_cost)
+    TextView totalCost;
+
     @BindView(R.id.shipment_note)
     TextView shipmentNote;
     @BindView(R.id.start_delivered_shipment)
@@ -94,9 +102,13 @@ public class OrderDetailsFragment extends Fragment {
     ImageView callSecondContact;
     @BindView(R.id.shipment_directions)
     Button shipmentDirections;
+
+    @BindView(R.id.shipment_details_progress)
+    ProgressBar detailsProgress;
+
     private GoogleMap googleMap;
     Unbinder unbinder;
-    int shipmentId, shipmentType;
+    Integer shipmentId, shipmentType;
     private IHttpService iHttpService;
     private Shipment shipment;
     String rejectReason = "";
@@ -115,10 +127,7 @@ public class OrderDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            shipmentId = getArguments().getInt("shipmentId");
-            shipmentType = getArguments().getInt("shipmentType");
-        }
+
     }
 
     @Override
@@ -144,18 +153,22 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().popBackStack();
-
-                Fragment frg = null;
-                frg = getActivity().getSupportFragmentManager().findFragmentByTag("OrdersFragment");
-                final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.detach(frg);
-                ft.attach(frg);
-                ft.commit();
+                backToOrdersFragment();
             }
         });
 
-        if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet())
+        if (getArguments() != null) {
+            shipmentId = getArguments().getInt("shipmentId");
+            shipmentType = getArguments().getInt("shipmentType");
+        }
+
+        if(ConnectionDetector.getInstance(getActivity()).isConnectingToInternet() )
+            if(shipmentId != null && shipmentType != null)
             getShipmentDetails();
+             else {
+                Toast.makeText(getActivity(), "خطأ فى الشحنة", Toast.LENGTH_SHORT).show();
+                backToOrdersFragment();
+            }
         else
             Toast.makeText(getActivity(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
 
@@ -194,20 +207,32 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void getShipmentDetails() {
+        detailsProgress.setVisibility(View.VISIBLE);
         Call<ShipmentDetails> call = iHttpService.shipmentDetails(getArguments().getInt("shipmentId"), getArguments().getInt("shipmentType"));
+        Log.w("shipmentID",getArguments().getInt("shipmentId")+"");
+
         call.enqueue(new Callback<ShipmentDetails>() {
             @Override
             public void onResponse(Call<ShipmentDetails> call, Response<ShipmentDetails> response) {
                 if (response.isSuccessful()) {
+                    if (detailsProgress != null)
+                    detailsProgress.setVisibility(View.GONE);
                     shipment = response.body().getShipment();
                     if (shipment != null)
                         fillShipmentDetails();
+                }
+                else {
+                    Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                    if (detailsProgress != null)
+                    detailsProgress.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<ShipmentDetails> call, Throwable t) {
-
+                Toast.makeText(getActivity(), "faill", Toast.LENGTH_SHORT).show();
+                if (detailsProgress != null)
+                detailsProgress.setVisibility(View.GONE);
             }
         });
 
@@ -228,9 +253,12 @@ public class OrderDetailsFragment extends Fragment {
         detailsShipmentArea.setText(shipment.getAddressAreaName());
         detailsAddress.setText(shipment.getRecipientAddressText());
         //set location on map
-        double lat = shipment.getAddressLatitude();
-        double lng = shipment.getAddressLongitude();
-        initMap(lat, lng);
+        if(shipment.getAddressLatitude() != null && shipment.getAddressLongitude() != null){
+            double lat = shipment.getAddressLatitude();
+            double lng = shipment.getAddressLongitude();
+            initMap(lat, lng);
+        }
+
         //set phone numbers
         detailsFirstNumber.setText(shipment.getMobile());
         detailsSecondNumber.setText(shipment.getRecipientMobile());
@@ -238,6 +266,9 @@ public class OrderDetailsFragment extends Fragment {
         shipmentNumber.setText(shipment.getTrackNumber());
         //set shipment cost
         shipmentCost.setText(shipment.getCost() + "");
+        deliverCost.setText(shipment.getMoneyCollection()+"");
+        double total = shipment.getCost() + shipment.getMoneyCollection();
+        totalCost.setText(total+"");
         //set shipment note
         shipmentNote.setText(shipment.getNotes());
     }
@@ -321,6 +352,7 @@ public class OrderDetailsFragment extends Fragment {
                     if (response.isSuccessful() && response.body().getStatusCode().equalsIgnoreCase("100")) {
                         Log.w("shipment", response.body().getStatus());
                         Toast.makeText(getActivity(), "تم تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
+                        backToOrdersFragment();
                     } else
                         Toast.makeText(getActivity(), "لا يمكن تغيير حالة الشحنة", Toast.LENGTH_SHORT).show();
                 }
@@ -364,16 +396,20 @@ public class OrderDetailsFragment extends Fragment {
                 }
                 break;
             case R.id.shipment_directions:
-                double lat = shipment.getAddressLatitude();
-                double lng = shipment.getAddressLongitude();
-                String label = shipment.getClientAddress();
-                String uriBegin = "geo:" + lat + "," + lng;
-                String query = lat + "," + lng + "(" + label + ")";
-                String encodedQuery = Uri.encode(query);
-                String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
-                Uri uri = Uri.parse(uriString);
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                if(shipment.getAddressLatitude() != null && shipment.getAddressLongitude() != null) {
+                    double lat = shipment.getAddressLatitude();
+                    double lng = shipment.getAddressLongitude();
+                    String label = shipment.getAddressCityName();
+                    String uriBegin = "geo:" + lat + "," + lng;
+                    String query = lat + "," + lng + "(" + label + ")";
+                    String encodedQuery = Uri.encode(query);
+                    String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+                    Uri uri = Uri.parse(uriString);
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+                else
+                    Toast.makeText(getActivity(), "لا توجد إتجاهات ", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -404,6 +440,19 @@ public class OrderDetailsFragment extends Fragment {
                         token.continuePermissionRequest();
                     }
                 }).check();
+
+    }
+
+    private void backToOrdersFragment(){
+
+//        Fragment frg = null;
+//        frg = getActivity().getSupportFragmentManager().findFragmentByTag("OrdersFragment");
+//        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//        ft.detach(frg);
+//        ft.attach(frg);
+//        ft.commit();
+
+        getActivity().getSupportFragmentManager().popBackStack();
 
     }
 

@@ -143,7 +143,9 @@ public class ShipmentsFragment extends Fragment {
         call.enqueue(new Callback<GetShipments>() {
             @Override
             public void onResponse(Call<GetShipments> call, Response<GetShipments> response) {
+
                 if (response.isSuccessful()) {
+                    shipments.clear();
                     if (shipmentsProgress != null && refreshLayout != null){
                         shipmentsProgress.setVisibility(View.GONE);
                         refreshLayout.setRefreshing(false);
@@ -186,6 +188,7 @@ public class ShipmentsFragment extends Fragment {
             @Override
             public void onResponse(Call<GetShipments> call, Response<GetShipments> response) {
                 if (response.isSuccessful()) {
+                    deliveringShipmentItem.clear();
                     for (int i = 0; i < response.body().getShipments().size(); i++) {
                         deliveringShipmentItem.add(response.body().getShipments().get(i));
                     }
@@ -202,6 +205,7 @@ public class ShipmentsFragment extends Fragment {
                         if(deliveringShipments != null && greenLight != null){
                             deliveringShipments.setText("لا يوجد شحنات جاري تسليمها ...");
                             greenLight.setImageResource(R.color.red);
+                            cardShipmentDetails.setVisibility(View.GONE);
                         }
 
                     }

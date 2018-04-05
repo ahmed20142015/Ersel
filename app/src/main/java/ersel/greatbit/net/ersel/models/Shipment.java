@@ -25,7 +25,13 @@ public class Shipment {
     private String trackNumber;
     @SerializedName("cost")
     @Expose
-    private Integer cost;
+    private double cost;
+    @SerializedName("moneyCollection")
+    @Expose
+    private double moneyCollection;
+    @SerializedName("employeeCommision")
+    @Expose
+    private Integer employeeCommision;
     @SerializedName("notes")
     @Expose
     private String notes;
@@ -58,10 +64,10 @@ public class Shipment {
     private Integer clientAreaId;
     @SerializedName("clientAddressLatitude")
     @Expose
-    private Double clientAddressLatitude;
+    private double clientAddressLatitude;
     @SerializedName("clientAddressLongitude")
     @Expose
-    private Double clientAddressLongitude;
+    private double clientAddressLongitude;
     @SerializedName("employeeId")
     @Expose
     private Integer employeeId;
@@ -106,7 +112,7 @@ public class Shipment {
     private String name;
     @SerializedName("email")
     @Expose
-    private Object email;
+    private String email;
     @SerializedName("mobile")
     @Expose
     private String mobile;
@@ -173,12 +179,28 @@ public class Shipment {
         this.trackNumber = trackNumber;
     }
 
-    public Integer getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public double getMoneyCollection() {
+        return moneyCollection;
+    }
+
+    public void setMoneyCollection(double moneyCollection) {
+        this.moneyCollection = moneyCollection;
+    }
+
+    public Integer getEmployeeCommision() {
+        return employeeCommision;
+    }
+
+    public void setEmployeeCommision(Integer employeeCommision) {
+        this.employeeCommision = employeeCommision;
     }
 
     public String getNotes() {
@@ -261,19 +283,19 @@ public class Shipment {
         this.clientAreaId = clientAreaId;
     }
 
-    public Double getClientAddressLatitude() {
+    public double getClientAddressLatitude() {
         return clientAddressLatitude;
     }
 
-    public void setClientAddressLatitude(Double clientAddressLatitude) {
+    public void setClientAddressLatitude(double clientAddressLatitude) {
         this.clientAddressLatitude = clientAddressLatitude;
     }
 
-    public Double getClientAddressLongitude() {
+    public double getClientAddressLongitude() {
         return clientAddressLongitude;
     }
 
-    public void setClientAddressLongitude(Double clientAddressLongitude) {
+    public void setClientAddressLongitude(double clientAddressLongitude) {
         this.clientAddressLongitude = clientAddressLongitude;
     }
 
@@ -389,11 +411,11 @@ public class Shipment {
         this.name = name;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -484,4 +506,5 @@ public class Shipment {
     public void setLastStatus(Integer lastStatus) {
         this.lastStatus = lastStatus;
     }
+
 }

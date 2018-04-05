@@ -14,7 +14,7 @@
         android:icon="@mipmap/ersel_icon"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -30,7 +30,7 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB1ie28qfrjinnW2CdOb0qPqy0AvmMfRG4" />
+            android:value="AIzaSyAEa90GpGfLvdO43tc-YbRCSGeAzGxXsnM" />
         <service
             android:name=".location.LocationUpdateService"
             android:enabled="true"

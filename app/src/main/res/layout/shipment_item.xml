@@ -7,9 +7,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="17dp"
-    android:layout_marginStart="17dp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_17sdp"
+    android:layout_marginStart="@dimen/_17sdp"
     android:clipChildren="false"
     android:clipToPadding="false"
     >
@@ -21,10 +21,10 @@
         android:clipChildren="false"
         android:clipToPadding="false"
 
-        android:elevation="2dp"
-        card_view:cardElevation="2dp"
-        card_view:cardCornerRadius="5dp"
-        card_view:contentPadding="1dp"
+        android:elevation="@dimen/_2sdp"
+        card_view:cardElevation="@dimen/_2sdp"
+        card_view:cardCornerRadius="@dimen/_5sdp"
+        card_view:contentPadding="@dimen/_1sdp"
         app:cardBackgroundColor="#f6f6f6"
         >
      <LinearLayout
@@ -40,19 +40,19 @@
              >
 
              <de.hdodenhof.circleimageview.CircleImageView
-                 android:layout_width="40dp"
-                 android:layout_height="40dp"
-                 android:layout_margin="5dp"
+                 android:layout_width="@dimen/_35sdp"
+                 android:layout_height="@dimen/_35sdp"
+                 android:layout_margin="@dimen/_5sdp"
                  android:scaleType="centerCrop"
-                 android:src="#fe5f29"
+                 android:src="@color/colorPrimary"
                  />
              <LinearLayout
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:orientation="vertical"
                  android:layout_gravity="center"
-                 android:layout_marginStart="3dp"
-                 android:layout_marginEnd="3dp"
+                 android:layout_marginStart="@dimen/_3sdp"
+                 android:layout_marginEnd="@dimen/_3sdp"
                  >
                  <LinearLayout
                      android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                          android:layout_height="wrap_content"
                          android:text="Order : "
                          android:textColor="#484848"
-                         android:textSize="17sp"
+                         android:textSize="@dimen/_15sdp"
                          android:textStyle="bold"
                          />
                      <TextView
@@ -74,7 +74,7 @@
                          android:layout_height="wrap_content"
                          android:text="555 "
                          android:textColor="#484848"
-                         android:textSize="16sp"
+                         android:textSize="@dimen/_13sdp"
                          android:textStyle="bold"
                          />
 
@@ -91,7 +91,7 @@
                          android:layout_height="wrap_content"
                          android:text="20/06/2017"
                          android:textColor="#a4a4a4"
-                         android:textSize="12sp"
+                         android:textSize="@dimen/_11sdp"
                          android:textStyle="bold"
                          />
                      <TextView
@@ -100,10 +100,10 @@
                          android:layout_height="wrap_content"
                          android:text="15.30"
                          android:textColor="#a4a4a4"
-                         android:textSize="12sp"
+                         android:textSize="@dimen/_11sdp"
                          android:textStyle="bold"
-                         android:layout_marginStart="10dp"
-                         android:layout_marginEnd="10dp"
+                         android:layout_marginStart="@dimen/_10sdp"
+                         android:layout_marginEnd="@dimen/_10sdp"
                          />
 
                  </LinearLayout>
@@ -114,27 +114,27 @@
 
          <View
              android:layout_width="match_parent"
-             android:layout_height="1dp"
+             android:layout_height="@dimen/_1sdp"
              android:background="#e8e8e8"
-             android:layout_marginTop="5dp"
-             android:layout_marginBottom="5dp"
-             android:layout_marginEnd="5dp"
-             android:layout_marginStart="5dp"
+             android:layout_marginTop="@dimen/_5sdp"
+             android:layout_marginBottom="@dimen/_5sdp"
+             android:layout_marginEnd="@dimen/_5sdp"
+             android:layout_marginStart="@dimen/_5sdp"
             />
 
          <LinearLayout
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
-             android:layout_marginStart="10dp"
-             android:layout_marginEnd="10dp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:layout_marginEnd="@dimen/_10sdp"
              >
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="Type :"
                  android:textColor="#ababab"
-                 android:textSize="14sp"
+                 android:textSize="@dimen/_11sdp"
                  android:textStyle="bold"
 
                  />
@@ -144,10 +144,10 @@
                  android:layout_height="wrap_content"
                  android:text="shipment"
                  android:textColor="#ffb147"
-                 android:textSize="13sp"
+                 android:textSize="@dimen/_11sdp"
                  android:textStyle="bold"
-                 android:layout_marginStart="5dp"
-                 android:layout_marginEnd="5dp"
+                 android:layout_marginStart="@dimen/_5sdp"
+                 android:layout_marginEnd="@dimen/_5sdp"
                  />
 
          </LinearLayout>
@@ -155,15 +155,15 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
-             android:layout_marginStart="10dp"
-             android:layout_marginEnd="10dp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:layout_marginEnd="@dimen/_10sdp"
              >
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="City : "
                  android:textColor="#ababab"
-                 android:textSize="14sp"
+                 android:textSize="@dimen/_11sdp"
                  android:textStyle="bold"
                  />
              <TextView
@@ -172,10 +172,10 @@
                  android:layout_height="wrap_content"
                  android:text="Giza"
                  android:textColor="#ababab"
-                 android:textSize="13sp"
+                 android:textSize="@dimen/_11sdp"
                  android:textStyle="bold"
-                 android:layout_marginStart="5dp"
-                 android:layout_marginEnd="5dp"
+                 android:layout_marginStart="@dimen/_5sdp"
+                 android:layout_marginEnd="@dimen/_5sdp"
                  />
 
          </LinearLayout>
@@ -183,16 +183,16 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
-             android:layout_marginStart="10dp"
-             android:layout_marginEnd="10dp"
-             android:layout_marginBottom="5dp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:layout_marginEnd="@dimen/_10sdp"
+             android:layout_marginBottom="@dimen/_5sdp"
              >
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="Address : "
                  android:textColor="#ababab"
-                 android:textSize="14sp"
+                 android:textSize="@dimen/_11sdp"
                  android:textStyle="bold"
                  />
              <TextView
@@ -201,44 +201,44 @@
                  android:layout_height="wrap_content"
                  android:text="Giza"
                  android:textColor="#ababab"
-                 android:textSize="13sp"
+                 android:textSize="@dimen/_11sdp"
                  android:textStyle="bold"
                  android:maxLines="1"
-                 android:layout_marginStart="5dp"
-                 android:layout_marginEnd="5dp"
+                 android:layout_marginStart="@dimen/_5sdp"
+                 android:layout_marginEnd="@dimen/_5sdp"
                  />
 
          </LinearLayout>
 
          <View
              android:layout_width="match_parent"
-             android:layout_height="1dp"
+             android:layout_height="@dimen/_1sdp"
              android:background="#e8e8e8"
-             android:layout_marginTop="5dp"
-             android:layout_marginBottom="5dp"
-             android:layout_marginEnd="5dp"
-             android:layout_marginStart="5dp"
+             android:layout_marginTop="@dimen/_5sdp"
+             android:layout_marginBottom="@dimen/_5sdp"
+             android:layout_marginEnd="@dimen/_5sdp"
+             android:layout_marginStart="@dimen/_5sdp"
              />
          <LinearLayout
              android:layout_width="wrap_content"
-             android:layout_height="50dp"
+             android:layout_height="@dimen/_40sdp"
              android:layout_gravity="center"
              android:gravity="center">
              <ImageView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:src="@drawable/ic_info_outline_black_24dp"
-                 android:tint="#fe5f29"
+                 android:tint="@color/colorPrimary"
                  />
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="Order details"
                  android:textColor="#ababab"
-                 android:textSize="17sp"
+                 android:textSize="@dimen/_14sdp"
                  android:textStyle="bold"
-                 android:layout_marginStart="5dp"
-                 android:layout_marginEnd="5dp"
+                 android:layout_marginStart="@dimen/_5sdp"
+                 android:layout_marginEnd="@dimen/_5sdp"
                  />
          </LinearLayout>
 

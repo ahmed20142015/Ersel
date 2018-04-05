@@ -11,6 +11,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +20,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,6 +37,8 @@ import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.firebase.FirebaseApp;
 
+import java.util.Locale;
+
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.fragments.LoginFragment;
 import ersel.greatbit.net.ersel.fragments.OrdersFragment;
@@ -42,6 +47,10 @@ import ersel.greatbit.net.ersel.fragments.OrdersFragment;
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    //release SHA   C2:27:FC:3F:2D:18:B7:FE:12:F8:85:56:78:FC:BE:56:F2:35:95:F0
+    //debug key  AIzaSyB1ie28qfrjinnW2CdOb0qPqy0AvmMfRG4
+    // release key AIzaSyAEa90GpGfLvdO43tc-YbRCSGeAzGxXsnM
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -55,6 +64,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Locale locale = new Locale("en_US");
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getApplicationContext().getResources().updateConfiguration(config, null);
+
+
         FirebaseApp.initializeApp(this);
  //        Log.w("token",SharedPrefManager.getInstance(this).getToken());
 

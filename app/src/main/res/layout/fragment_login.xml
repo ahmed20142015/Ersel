@@ -24,30 +24,30 @@
     >
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/_80sdp"
         android:id="@+id/formLogo"
         android:src="@drawable/logo_big"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:tint="@color/white"
-        
+
         />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ersel"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="@dimen/_25sdp"
                 android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:layout_gravity="center"
                 />
             <TextView
@@ -55,10 +55,10 @@
                 android:layout_height="wrap_content"
                 android:text="Let's finish creating your account"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                android:layout_marginBottom="20dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:layout_gravity="center"
                 />
         </LinearLayout>
@@ -69,8 +69,8 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
         android:foregroundGravity="center"
         >
 
@@ -81,35 +81,35 @@
                 <EditText
                     android:id="@+id/user_mobile_number"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:hint="Phone"
                     android:background="@drawable/rounded_white"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_user_icon"
-                    android:textSize="18sp"
-                    android:drawablePadding="5dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/_15sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:inputType="number"
                     />
                 <EditText
                     android:id="@+id/user_password"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:hint="Password"
                     android:background="@drawable/rounded_white"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:drawableLeft="@drawable/ic_pass_icon"
-                    android:textSize="18sp"
-                    android:drawablePadding="5dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:textSize="@dimen/_15sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
                     android:inputType="textPassword"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="@dimen/_15sdp"
                     />
             </LinearLayout>
 
@@ -124,21 +124,21 @@
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/_50sdp"
         android:textColor="@color/white"
         android:text="L O G I N"
         android:textStyle="bold"
         android:background="@drawable/login_background"
         android:layout_gravity="center"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:textSize="20sp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:textSize="@dimen/_18sdp"
         />
     </LinearLayout>
     <ProgressBar
         android:id="@+id/login_progress"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         style="?android:attr/progressBarStyleSmall"
         android:layout_gravity="center"
         android:indeterminateDrawable="@drawable/progress_bar"

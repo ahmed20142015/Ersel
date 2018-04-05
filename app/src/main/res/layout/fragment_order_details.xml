@@ -3,7 +3,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:Tool="http://schemas.android.com/tools"
@@ -46,7 +45,7 @@
                     android:layout_gravity="center"
                     android:text="Ersel"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_18sdp"
                     android:textColor="#fff"
                     />
 
@@ -57,17 +56,17 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="2dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginBottom="5dp"
-            card_view:contentPadding="1dp"
+            card_view:cardElevation="@dimen/_2sdp"
+            card_view:cardCornerRadius="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:elevation="2dp"
+            android:elevation="@dimen/_2sdp"
 
             >
         <LinearLayout
@@ -81,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 >
                 <TextView
                     android:id="@+id/details_client_name"
@@ -90,7 +89,7 @@
                     Tool:text=" محمد أحمد محمد"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:gravity="right"
 
@@ -99,12 +98,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="إسم العميل :"
-                    android:paddingRight="4dp"
+                    android:paddingRight="@dimen/_4sdp"
                     android:textColor="#ababab"
                     android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     />
             </LinearLayout>
             <TextView
@@ -113,12 +112,12 @@
                 android:text="العنوان بالتفصيل"
                 android:textColor="#ababab"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:paddingRight="4dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_4sdp"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -133,10 +132,10 @@
                     Tool:text="الهرم"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_14sdp"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="right"
                     />
                 <TextView
@@ -145,9 +144,9 @@
                     android:text=" - "
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     />
                 <TextView
                     android:id="@+id/details_shipment_city"
@@ -156,10 +155,10 @@
                     Tool:text="الجيزة"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:paddingRight="4dp"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_4sdp"
                     />
             </LinearLayout>
 
@@ -170,44 +169,44 @@
                 Tool:text="شارع الحمد متفرع من شارع الهرم عماير جاردينيا"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_gravity="center"
-                android:paddingRight="4dp"
+                android:paddingRight="@dimen/_4sdp"
                 />
 
             <com.google.android.gms.maps.MapView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/client_location"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_margin="2dp"
+                android:layout_height="@dimen/_170sdp"
+                android:layout_margin="@dimen/_2sdp"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_gravity="right"
                 android:gravity="right"
                 >
 
                 <Button
                     android:id="@+id/shipment_directions"
-                    android:layout_width="100dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:text="الإتجاهات"
                     android:textColor="#fff"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/_14sdp"
                     android:drawableLeft="@drawable/ic_directions_white_24dp"
                     android:background="@color/colorPrimary"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:paddingRight="4dp"
-                    android:paddingLeft="4dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_4sdp"
+                    android:paddingLeft="@dimen/_4sdp"
                     />
             </LinearLayout>
 
@@ -218,17 +217,17 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="2dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginBottom="5dp"
-            card_view:contentPadding="1dp"
+            card_view:cardElevation="@dimen/_2sdp"
+            card_view:cardCornerRadius="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:elevation="2dp"
+            android:elevation="@dimen/_2sdp"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -241,8 +240,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_gravity="right"
                 android:gravity="right"
                 >
@@ -252,8 +251,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_call_white_24dp"
                     android:tint="@color/colorPrimary"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     />
 
                 <TextView
@@ -263,10 +262,10 @@
                     Tool:text="0101548554"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_14sdp"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="right"
                     />
                 <TextView
@@ -275,29 +274,29 @@
                     android:text="رقم التليفون :"
                     android:textColor="#ababab"
                     android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:paddingRight="4dp"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_4sdp"
                     />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="@dimen/_1sdp"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_gravity="right"
                 android:gravity="right"
                 >
@@ -307,8 +306,8 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_call_white_24dp"
                     android:tint="@color/colorPrimary"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     />
 
                 <TextView
@@ -318,10 +317,10 @@
                     Tool:text="0101548554"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/_14sdp"
                     android:layout_weight="1"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:gravity="right"
                     />
                 <TextView
@@ -330,10 +329,10 @@
                     android:text="رقم التليفون :"
                     android:textColor="#ababab"
                     android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:paddingRight="4dp"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_4sdp"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -343,17 +342,17 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="2dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginBottom="5dp"
-            card_view:contentPadding="1dp"
+            card_view:cardElevation="@dimen/_2sdp"
+            card_view:cardCornerRadius="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:elevation="2dp"
+            android:elevation="@dimen/_2sdp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -369,13 +368,13 @@
                     android:text="تفاصيل الشحنة"
                     android:textColor="#ababab"
                     android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:textSize="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_gravity="right"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:paddingRight="4dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
                     />
 
                 <LinearLayout
@@ -391,30 +390,30 @@
                         Tool:text="0554"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/_14sdp"
                         android:layout_weight="1"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:gravity="right"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="رقم الشحنة :"
+                        android:text="رقم الشحنـة :"
                         android:textColor="#ababab"
                         android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:paddingRight="4dp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_4sdp"
                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+
                     >
                     <TextView
                         android:id="@+id/shipment_cost"
@@ -423,10 +422,43 @@
                         Tool:text="554"
                         android:textColor="@color/colorPrimary"
                         android:textStyle="bold"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/_14sdp"
                         android:layout_weight="1"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:gravity="right"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="سعر الشحنة :"
+                        android:textColor="#ababab"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
+
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+
+                    >
+                    <TextView
+                        android:id="@+id/deliver_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        Tool:text="554"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:gravity="right"
                         />
                     <TextView
@@ -435,10 +467,43 @@
                         android:text="تحصيل مبلغ :"
                         android:textColor="#ababab"
                         android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:paddingRight="4dp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
+
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    >
+                    <TextView
+                        android:id="@+id/total_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        Tool:text="554"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:gravity="right"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الإجمالـــي    :"
+                        android:textColor="#ababab"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
 
                         />
                 </LinearLayout>
@@ -448,17 +513,17 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation="2dp"
-            card_view:cardCornerRadius="5dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginLeft="17dp"
-            android:layout_marginBottom="5dp"
-            card_view:contentPadding="1dp"
+            card_view:cardElevation="@dimen/_2sdp"
+            card_view:cardCornerRadius="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:elevation="2dp"
+            android:elevation="@dimen/_2sdp"
             >
         <LinearLayout
             android:layout_width="match_parent"
@@ -474,13 +539,13 @@
                 android:text="ملحوظة"
                 android:textColor="#ababab"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:paddingRight="4dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:paddingRight="@dimen/_4sdp"
                 />
             <TextView
                 android:id="@+id/shipment_note"
@@ -489,66 +554,66 @@
                 Tool:text="أي ملااااااااااااااحظااات"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp"
-                android:paddingRight="4dp"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingRight="@dimen/_4sdp"
                 />
         </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <Button
             android:id="@+id/start_delivered_shipment"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_40sdp"
             android:text="بـدأ التوصيــل"
-            android:textSize="22sp"
+            android:textSize="@dimen/_18sdp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:visibility="gone"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
+            android:visibility="gone"
             />
         <LinearLayout
             android:id="@+id/wait_cancle_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/_17sdp"
+            android:layout_marginRight="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:visibility="gone"
-            android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginBottom="20dp"
             >
             <Button
                 android:id="@+id/shipment_under_wating"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_40sdp"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="@dimen/_15sdp"
                 android:text="تحت الإنتظار"
                 android:layout_weight="1"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/colorPrimary"
                 android:textColor="#fff"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="@dimen/_5sdp"
                 />
 
             <Button
                 android:id="@+id/shipment_rejected"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_40sdp"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="@dimen/_15sdp"
                 android:text="تم الرفض"
                 android:layout_weight="1"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/colorPrimary"
                 android:textColor="#fff"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 />
 
 
@@ -558,13 +623,15 @@
 
     <ProgressBar
         android:id="@+id/shipment_details_progress"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         style="?android:attr/progressBarStyleSmall"
         android:layout_gravity="center"
         android:indeterminateDrawable="@drawable/progress_bar"
         android:max="100"
-        android:progress="20"/>
+        android:progress="20"
+        android:visibility="gone"
+        />
 
 </FrameLayout>
 

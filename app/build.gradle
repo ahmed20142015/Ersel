@@ -46,7 +46,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.karumi:dexter:4.2.0'
     compile 'com.android.support:multidex:1.0.1'
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
 }
-
 
 apply plugin: 'com.google.gms.google-services'
