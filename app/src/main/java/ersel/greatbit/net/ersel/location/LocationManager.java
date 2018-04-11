@@ -35,7 +35,7 @@ public class LocationManager {
         }
         return locationManager;
     }
-    public void findMyLocation() {
+    private void findMyLocation() {
         android.location.LocationManager locationManager = (android.location.LocationManager)
                 mContext.getSystemService(Context.LOCATION_SERVICE);
 
@@ -73,10 +73,10 @@ public class LocationManager {
             @Override
             public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.isSuccessful()) {
-               //     Toast.makeText(mContext, "Location updated", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(mContext, "Location updated", Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Error upload location", Toast.LENGTH_SHORT).show();
             }
 
             @Override

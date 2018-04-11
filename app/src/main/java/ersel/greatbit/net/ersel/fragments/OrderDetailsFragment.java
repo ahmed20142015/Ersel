@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -87,11 +90,13 @@ public class OrderDetailsFragment extends Fragment {
     Button startDeliveredShipment;
     EditText rejectedReason;
     @BindView(R.id.shipment_under_wating)
-    Button shipmentUnderWating;
+    FloatingActionButton shipmentUnderWating;
     @BindView(R.id.shipment_rejected)
-    Button shipmentRejected;
+    FloatingActionButton shipmentRejected;
+    @BindView(R.id.shipment_delivered)
+    FloatingActionButton shipmentDelivered;
     @BindView(R.id.wait_cancle_layout)
-    LinearLayout waitCancleLayout;
+    FloatingActionMenu waitCancleLayout;
     @BindView(R.id.details_shipment_area)
     TextView detailsShipmentArea;
     @BindView(R.id.details_shipment_city)
@@ -102,10 +107,10 @@ public class OrderDetailsFragment extends Fragment {
     ImageView callSecondContact;
     @BindView(R.id.shipment_directions)
     Button shipmentDirections;
-
     @BindView(R.id.shipment_details_progress)
     ProgressBar detailsProgress;
-
+    @BindView(R.id.ahmed)
+    CardView margin;
     private GoogleMap googleMap;
     Unbinder unbinder;
     Integer shipmentId, shipmentType;
@@ -242,6 +247,10 @@ public class OrderDetailsFragment extends Fragment {
         if (shipment.getLastStatus() == 1) {
             startDeliveredShipment.setVisibility(View.VISIBLE);
         } else if (shipment.getLastStatus() == 2) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)margin.getLayoutParams();
+            params.setMargins(0, 0, 0, 260);
+            margin.setLayoutParams(params);
+            margin.requestLayout();
             waitCancleLayout.setVisibility(View.VISIBLE);
         }
 
@@ -258,10 +267,19 @@ public class OrderDetailsFragment extends Fragment {
             double lng = shipment.getAddressLongitude();
             initMap(lat, lng);
         }
+        else{
+            mMapView.setVisibility(View.GONE);
+            shipmentDirections.setVisibility(View.GONE);
+        }
 
         //set phone numbers
-        detailsFirstNumber.setText(shipment.getMobile());
-        detailsSecondNumber.setText(shipment.getRecipientMobile());
+        if(shipment.getMobile() != null){
+            detailsFirstNumber.setText(shipment.getMobile());
+        }
+        if(shipment.getRecipientMobile() != null){
+            detailsSecondNumber.setText(shipment.getRecipientMobile());
+        }
+
         //set shipment number
         shipmentNumber.setText(shipment.getTrackNumber());
         //set shipment cost
@@ -292,8 +310,8 @@ public class OrderDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 newStatus = 2;
-                alertDialog.dismiss();
                 updateStatus();
+                alertDialog.dismiss();
             }
         });
 
@@ -371,7 +389,8 @@ public class OrderDetailsFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected, R.id.call_first_contact, R.id.call_second_contact,R.id.shipment_directions})
+    @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected, R.id.call_first_contact,
+            R.id.call_second_contact,R.id.shipment_directions,R.id.shipment_delivered})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shipment_under_wating:
@@ -382,15 +401,20 @@ public class OrderDetailsFragment extends Fragment {
                 newStatus = 4;
                 rejectedReasonDialog();
                 break;
+            case R.id.shipment_delivered:
+                newStatus = 3;
+                updateStatus();
+                break;
+
             case R.id.call_first_contact:
-                if (!detailsFirstNumber.getText().equals(null)) {
+                if (!detailsFirstNumber.getText().toString().equalsIgnoreCase("")) {
                     String uri = "tel:" + detailsFirstNumber.getText().toString();
                     callShipmentClient(uri);
                 }
 
                 break;
             case R.id.call_second_contact:
-                if (!detailsSecondNumber.getText().equals(null)) {
+                if (!detailsSecondNumber.getText().toString().equalsIgnoreCase("")) {
                     String uri = "tel:" + detailsSecondNumber.getText().toString();
                     callShipmentClient(uri);
                 }
@@ -408,8 +432,7 @@ public class OrderDetailsFragment extends Fragment {
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 }
-                else
-                    Toast.makeText(getActivity(), "لا توجد إتجاهات ", Toast.LENGTH_SHORT).show();
+
                 break;
 
         }
@@ -444,13 +467,6 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void backToOrdersFragment(){
-
-//        Fragment frg = null;
-//        frg = getActivity().getSupportFragmentManager().findFragmentByTag("OrdersFragment");
-//        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-//        ft.detach(frg);
-//        ft.attach(frg);
-//        ft.commit();
 
         getActivity().getSupportFragmentManager().popBackStack();
 

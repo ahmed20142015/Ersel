@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import ersel.greatbit.net.ersel.location.LocationUpdateService;
+import ersel.greatbit.net.ersel.location.MyService;
 
 /**
  * Created by Eslam on 3/12/2018.
@@ -21,7 +22,7 @@ public class BootCompletedBroadCast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if(SharedPrefManager.getInstance(context).isLogin()) {
-            final Intent i = new Intent(context, LocationUpdateService.class);
+            final Intent i = new Intent(context, MyService.class);
             Integer api = Integer.valueOf(Build.VERSION.SDK);
             if(api > 25)
                 context.startForegroundService(i);

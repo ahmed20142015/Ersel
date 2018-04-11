@@ -35,7 +35,7 @@
             android:text="تحت الإنتظار"
             android:layout_weight="1"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_hover"
             />
 
         <Button
@@ -48,7 +48,7 @@
             android:text="تم الرفض"
             android:layout_weight="1"
             android:layout_margin="@dimen/_10sdp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_hover"
             />
 
 

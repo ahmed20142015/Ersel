@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#fff</color>
     <color name="red">#ed0814</color>
+
+    <drawable name="ss">#f1f1f1</drawable>
+    <drawable name="ff">#fff</drawable>
 </resources>

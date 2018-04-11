@@ -2,6 +2,7 @@ package ersel.greatbit.net.ersel.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 
 /**
  * Created by Eslam on 3/11/2018.
@@ -11,7 +12,9 @@ public class SharedPrefManager {
     private static final String SHARES_PREF_NAME = "sharedPref";
     private static final String KEY_TOKEN = "keytoken";
     private static final String KEY_SEND_TOKEN = "keysendtoken";
-    private static final String KEY_REFRESH_TOKEN = "keyrefreshtoken";
+    private static final String KEY_LAST_LAT = "keylastlat";
+    private static final String KEY_LAST_LONG = "keylastlong";
+
     private static SharedPrefManager sharedPrefManager;
     private static Context mContext;
     SharedPreferences sharedPref ;
@@ -52,7 +55,27 @@ public class SharedPrefManager {
         return sharedPref.getBoolean(KEY_SEND_TOKEN,false);
     }
 
+    public String getLastLat()
+    {
+        return sharedPref.getString(KEY_LAST_LAT,"");
+    }
 
+    public void setLastLat(String lastLat){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(KEY_LAST_LAT,lastLat);
+        editor.apply();
+    }
+
+    public String getLastLong()
+    {
+        return sharedPref.getString(KEY_LAST_LONG,"");
+    }
+
+    public void setLastLong(String lastLng){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(KEY_LAST_LONG,lastLng);
+        editor.apply();
+    }
 
 
 }

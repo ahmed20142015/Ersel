@@ -123,7 +123,7 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
             int shipmentId = shipments.get(position).getId();
             int shipmentType = shipments.get(position).getType();
             ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                    .add(R.id.mainContent,
+                    .replace(R.id.mainContent,
                             OrderDetailsFragment.newInstance(shipmentId,shipmentType)).addToBackStack("OrderDetailsFragment").commit();
 
         }

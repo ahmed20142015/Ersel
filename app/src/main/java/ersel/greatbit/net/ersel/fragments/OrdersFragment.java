@@ -3,6 +3,7 @@ package ersel.greatbit.net.ersel.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,6 +41,7 @@ import ersel.greatbit.net.ersel.firebase.FCMRegistrationService;
 import ersel.greatbit.net.ersel.http.HttpService;
 import ersel.greatbit.net.ersel.http.IHttpService;
 import ersel.greatbit.net.ersel.location.LocationUpdateService;
+import ersel.greatbit.net.ersel.location.MyService;
 import ersel.greatbit.net.ersel.models.GetShipments;
 import ersel.greatbit.net.ersel.models.Shipment;
 import ersel.greatbit.net.ersel.utilities.ConnectionDetector;
@@ -89,7 +91,8 @@ public class OrdersFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         startSevice();
-    }
+
+     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -161,7 +164,7 @@ public class OrdersFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.insertNewFragment(ShipmentsFragment.newInstance(1));
         adapter.insertNewFragment(ShipmentsFragment.newInstance(3));
         adapter.insertNewFragment(ShipmentsFragment.newInstance(4));
@@ -268,7 +271,7 @@ public class OrdersFragment extends Fragment {
 
         //   Init location service
 
-        final Intent intent = new Intent(getActivity(), LocationUpdateService.class);
+        final Intent intent = new Intent(getActivity(), MyService.class);
         Integer api = Integer.valueOf(Build.VERSION.SDK);
         if(api > 25)
         getActivity().startForegroundService(intent);
@@ -287,6 +290,8 @@ public class OrdersFragment extends Fragment {
 
 
     }
+
+
 
 
 }

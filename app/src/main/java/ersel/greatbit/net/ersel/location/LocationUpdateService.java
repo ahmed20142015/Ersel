@@ -39,7 +39,7 @@ public class LocationUpdateService extends Service {
         Runnable r = new Runnable() {
             @Override public void run() {
                 final LocationManager manager = LocationManager.getInstance(LocationUpdateService.this);
-                manager.findMyLocation();
+               // manager.findMyLocation();
                 handler.postDelayed(this, 10000);
             }
         };

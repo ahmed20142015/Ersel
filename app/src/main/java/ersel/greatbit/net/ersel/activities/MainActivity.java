@@ -42,8 +42,6 @@ import java.util.Locale;
 import ersel.greatbit.net.ersel.R;
 import ersel.greatbit.net.ersel.fragments.LoginFragment;
 import ersel.greatbit.net.ersel.fragments.OrdersFragment;
-
-
 import ersel.greatbit.net.ersel.utilities.SharedPrefManager;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -70,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Configuration config = new Configuration();
         config.locale = locale;
         getApplicationContext().getResources().updateConfiguration(config, null);
+
+
 
 
         FirebaseApp.initializeApp(this);

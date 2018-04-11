@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:Tool="http://schemas.android.com/tools"
@@ -58,8 +59,8 @@
             android:layout_height="wrap_content"
             card_view:cardElevation="@dimen/_2sdp"
             card_view:cardCornerRadius="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
@@ -202,11 +203,12 @@
                     android:textStyle="bold"
                     android:textSize="@dimen/_14sdp"
                     android:drawableLeft="@drawable/ic_directions_white_24dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_hover"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:paddingRight="@dimen/_4sdp"
                     android:paddingLeft="@dimen/_4sdp"
+
                     />
             </LinearLayout>
 
@@ -219,8 +221,8 @@
             android:layout_height="wrap_content"
             card_view:cardElevation="@dimen/_2sdp"
             card_view:cardCornerRadius="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
@@ -344,8 +346,8 @@
             android:layout_height="wrap_content"
             card_view:cardElevation="@dimen/_2sdp"
             card_view:cardCornerRadius="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
@@ -511,19 +513,20 @@
 
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
+            android:id="@+id/ahmed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             card_view:cardElevation="@dimen/_2sdp"
             card_view:cardCornerRadius="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
             card_view:contentPadding="@dimen/_1sdp"
             app:cardBackgroundColor="#f6f6f6"
             android:layout_marginTop="@dimen/_15sdp"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:elevation="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             >
         <LinearLayout
             android:layout_width="match_parent"
@@ -563,6 +566,9 @@
         </LinearLayout>
         </android.support.v7.widget.CardView>
 
+
+
+
         <Button
             android:id="@+id/start_delivered_shipment"
             android:layout_width="@dimen/_140sdp"
@@ -572,52 +578,52 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_hover"
             android:textColor="#fff"
             android:visibility="gone"
             />
-        <LinearLayout
-            android:id="@+id/wait_cancle_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/_17sdp"
-            android:layout_marginRight="@dimen/_17sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:visibility="gone"
-            >
-            <Button
-                android:id="@+id/shipment_under_wating"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:textStyle="bold"
-                android:textSize="@dimen/_15sdp"
-                android:text="تحت الإنتظار"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/colorPrimary"
-                android:textColor="#fff"
-                android:layout_marginRight="@dimen/_5sdp"
-                />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/wait_cancle_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_marginLeft="@dimen/_17sdp"-->
+            <!--android:layout_marginRight="@dimen/_17sdp"-->
+            <!--android:layout_marginBottom="@dimen/_20sdp"-->
+            <!--android:visibility="gone"-->
+            <!--&gt;-->
+            <!--<Button-->
+                <!--android:id="@+id/shipment_under_wating"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/_40sdp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="@dimen/_15sdp"-->
+                <!--android:text="تحت الإنتظار"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:background="@drawable/button_hover"-->
+                <!--android:textColor="#fff"-->
+                <!--android:layout_marginRight="@dimen/_5sdp"-->
+                <!--/>-->
 
-            <Button
-                android:id="@+id/shipment_rejected"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:textStyle="bold"
-                android:textSize="@dimen/_15sdp"
-                android:text="تم الرفض"
-                android:layout_weight="1"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/colorPrimary"
-                android:textColor="#fff"
-                android:layout_marginLeft="@dimen/_5sdp"
-                />
+            <!--<Button-->
+                <!--android:id="@+id/shipment_rejected"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/_40sdp"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textSize="@dimen/_15sdp"-->
+                <!--android:text="تم الرفض"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:background="@drawable/button_hover"-->
+                <!--android:textColor="#fff"-->
+                <!--android:layout_marginLeft="@dimen/_5sdp"-->
+                <!--/>-->
 
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 
@@ -632,6 +638,79 @@
         android:progress="20"
         android:visibility="gone"
         />
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/wait_cancle_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            fab:menu_animationDelayPerItem="55"
+            fab:menu_backgroundColor="@android:color/transparent"
+            fab:menu_buttonSpacing="0dp"
+            fab:menu_colorNormal="@color/colorPrimary"
+            fab:menu_colorPressed="#3ECBF7"
+            fab:menu_colorRipple="#99d4d4d4"
+            fab:menu_fab_label="تغيير حالة الشحنة"
+            fab:menu_fab_size="normal"
+            fab:menu_icon="@drawable/ic_add_white_24dp"
+            fab:menu_labels_colorNormal="#333"
+            fab:menu_labels_colorPressed="#444"
+            fab:menu_labels_colorRipple="#66efecec"
+            fab:menu_labels_cornerRadius="3dp"
+            fab:menu_labels_ellipsize="none"
+            fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+            fab:menu_labels_margin="0dp"
+            fab:menu_labels_maxLines="-1"
+            fab:menu_labels_padding="8dp"
+            fab:menu_labels_position="left"
+            fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+            fab:menu_labels_showShadow="true"
+            fab:menu_labels_singleLine="false"
+            fab:menu_labels_textColor="#f2f1f1"
+            fab:menu_labels_textSize="15sp"
+            fab:menu_openDirection="up"
+            fab:menu_shadowColor="#66aff198"
+            fab:menu_shadowRadius="4dp"
+            fab:menu_shadowXOffset="1dp"
+            fab:menu_shadowYOffset="4dp"
+            fab:menu_showShadow="true"
+            android:layout_gravity="end|bottom"
+            android:visibility="gone"
+            >
+
+
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/shipment_under_wating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/if_onoff_1370046"
+                fab:fab_label="تحت الإنتظار"
+                fab:fab_size="mini"
+                style="@style/yellow"
+                />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/shipment_rejected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/if_error_outline_3018555"
+                fab:fab_label="تم الرفض"
+                fab:fab_size="mini"
+                style="@style/Red"
+                />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/shipment_delivered"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/delivered"
+                fab:fab_label="تم التوصيل"
+                fab:fab_size="mini"
+                style="@style/Green"
+                />
+        </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>
 

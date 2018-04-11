@@ -36,16 +36,12 @@ import retrofit2.Response;
 
 
 public class ShipmentsFragment extends Fragment {
-
     @BindView(R.id.shipments_list)
     RecyclerView shipmentsList;
-
     @BindView(R.id.shipments_progress)
     ProgressBar shipmentsProgress;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout refreshLayout;
-
-
     @BindView(R.id.delivering_shipments)
     TextView deliveringShipments;
     @BindView(R.id.card_shipment_client_name)
@@ -230,7 +226,7 @@ public class ShipmentsFragment extends Fragment {
     public void onViewClicked() {
 
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.mainContent,
+                .replace(R.id.mainContent,
                         OrderDetailsFragment.newInstance(deliveringShipmentItem.get(0).getId(), deliveringShipmentItem.get(0).getType()))
                 .addToBackStack("OrderDetailsFragment").commit();
 
