@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private final static int PLAY_SERVICES_REQUEST = 1000;
     private static Context context;
 
-    @SuppressLint("WrongConstant")
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         context = this;
 
-
         FirebaseApp.initializeApp(this);
  //        Log.w("token",SharedPrefManager.getInstance(this).getToken());
 
@@ -80,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},
                 1);
-
 
         if (checkPlayServices()){
             buildGoogleApiClient();
@@ -98,16 +94,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     .commit();
         }
 
-
-
     }
-
 
     public static   void closeActivity(){
         ( (Activity)context).finish();
     }
-
-
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)

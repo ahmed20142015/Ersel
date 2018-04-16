@@ -40,7 +40,6 @@ public class TokenInterceptor implements Interceptor {
             newBuilder.header("auth", token);
         }
 
-
         newBuilder.method(originalRequest.method(), originalRequest.body());
 
         Response response = chain.proceed(newBuilder.build());
