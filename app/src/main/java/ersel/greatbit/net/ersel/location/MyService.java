@@ -116,7 +116,7 @@ public class MyService extends Service
     {
         Log.e(TAG, "onCreate");
         initializeLocationManager();
-        iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(this).getToken());
+
         try {
             mLocationManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
@@ -161,7 +161,7 @@ public class MyService extends Service
     }
 
     private void sendLocationToServer(double lat , double lng){
-
+        iHttpService = HttpService.createService(IHttpService.class, SharedPrefManager.getInstance(this).getToken());
         Call<BaseResponse> call = iHttpService.updateLocation(lat,lng);
         call.enqueue(new Callback<BaseResponse>() {
             @Override

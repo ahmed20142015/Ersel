@@ -29,7 +29,6 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
 
     private Context context;
     private ArrayList<Shipment> shipments;
-
     View view;
 
 
@@ -85,6 +84,8 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
         holder.shipmentCity.setText(shipments.get(position).getAddressCityName());
         holder.shipmentAddress.setText(shipments.get(position).getAddressText());
 
+        holder.shipmentNumber.setText(position+1 +"");
+
     }
 
     @Override
@@ -109,7 +110,8 @@ public class ShipmentAdapter extends RecyclerView.Adapter<ShipmentAdapter.myview
         TextView shipmentCity;
         @BindView(R.id.shipment_address)
         TextView shipmentAddress;
-
+        @BindView(R.id.shipment_number)
+        TextView shipmentNumber;
         public myviewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

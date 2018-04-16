@@ -3,6 +3,7 @@ package ersel.greatbit.net.ersel.activities;
 import android.Manifest;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private final static int REQUEST_CHECK_SETTINGS = 2000;
     private final static int PLAY_SERVICES_REQUEST = 1000;
-
+    private static Context context;
 
     @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         config.locale = locale;
         getApplicationContext().getResources().updateConfiguration(config, null);
 
-
+        context = this;
 
 
         FirebaseApp.initializeApp(this);
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         } else {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.mainContent, LoginFragment.newInstance("", ""), "LoginFragment")
+                    .add(R.id.mainContent, LoginFragment.newInstance(), "LoginFragment")
                     .commit();
         }
 
@@ -102,7 +103,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
 
-
+    public static   void closeActivity(){
+        ( (Activity)context).finish();
+    }
 
 
 

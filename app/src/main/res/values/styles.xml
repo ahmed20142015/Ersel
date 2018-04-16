@@ -40,4 +40,10 @@
         <item name="fab_colorPressed">#FFFF33</item>
         <item name="fab_colorRipple">#FFFF00</item>
     </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_bottom</item>
+    </style>
+
 </resources>

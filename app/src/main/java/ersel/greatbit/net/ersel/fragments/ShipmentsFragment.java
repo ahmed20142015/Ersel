@@ -150,7 +150,7 @@ public class ShipmentsFragment extends Fragment {
                     for (int i = 0; i < response.body().getShipments().size(); i++) {
                         shipments.add(response.body().getShipments().get(i));
                     }
-                    if (shipments.size() > 0) {
+                    if (shipments.size() > 0 && shipmentsList!= null) {
                         shipmentsList.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
@@ -160,7 +160,7 @@ public class ShipmentsFragment extends Fragment {
                         shipmentsProgress.setVisibility(View.GONE);
                         refreshLayout.setRefreshing(false);
                     }
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+               //     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -206,8 +206,8 @@ public class ShipmentsFragment extends Fragment {
 
                     }
 
-                } else
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                } //else
+//                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
 
 
             }

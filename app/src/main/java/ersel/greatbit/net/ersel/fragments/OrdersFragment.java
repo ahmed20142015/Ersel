@@ -233,7 +233,7 @@ public class OrdersFragment extends Fragment {
 //                        getActivity().stopService(intent);
 //                        alarm.cancel(pintent);
 
-                        final Intent intent = new Intent(getActivity(), LocationUpdateService.class);
+                        final Intent intent = new Intent(getActivity(), MyService.class);
                         getActivity().stopService(intent);
                         getActivity().finish();
                     }

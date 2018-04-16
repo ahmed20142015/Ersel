@@ -71,8 +71,8 @@ public class OrderDetailsFragment extends Fragment {
     TextView detailsAddress;
     @BindView(R.id.details_first_number)
     TextView detailsFirstNumber;
-    @BindView(R.id.details_second_number)
-    TextView detailsSecondNumber;
+//    @BindView(R.id.details_second_number)
+//    TextView detailsSecondNumber;
     @BindView(R.id.shipment_number)
     TextView shipmentNumber;
     @BindView(R.id.shipment_cost)
@@ -103,8 +103,8 @@ public class OrderDetailsFragment extends Fragment {
     TextView detailsShipmentCity;
     @BindView(R.id.call_first_contact)
     ImageView callFirstContact;
-    @BindView(R.id.call_second_contact)
-    ImageView callSecondContact;
+//    @BindView(R.id.call_second_contact)
+//    ImageView callSecondContact;
     @BindView(R.id.shipment_directions)
     Button shipmentDirections;
     @BindView(R.id.shipment_details_progress)
@@ -182,6 +182,11 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -244,25 +249,41 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void fillShipmentDetails() {
-        if (shipment.getLastStatus() == 1) {
-            startDeliveredShipment.setVisibility(View.VISIBLE);
-        } else if (shipment.getLastStatus() == 2) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)margin.getLayoutParams();
-            params.setMargins(0, 0, 0, 260);
-            margin.setLayoutParams(params);
-            margin.requestLayout();
-            waitCancleLayout.setVisibility(View.VISIBLE);
+        if (shipment.getLastStatus() != null){
+
+            if (shipment.getLastStatus() == 1) {
+                startDeliveredShipment.setVisibility(View.VISIBLE);
+            } else if (shipment.getLastStatus() == 2) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)margin.getLayoutParams();
+                params.setMargins(0, 0, 0, 260);
+                margin.setLayoutParams(params);
+                margin.requestLayout();
+                waitCancleLayout.setVisibility(View.VISIBLE);
+            }
+
         }
 
-
         // set client name
-        detailsClientName.setText(shipment.getClientName());
+        if(shipment.getClientName() != null){
+            detailsClientName.setText(shipment.getClientName());
+        }
+
         // set shipment address
-        detailsShipmentCity.setText(shipment.getAddressCityName());
-        detailsShipmentArea.setText(shipment.getAddressAreaName());
-        detailsAddress.setText(shipment.getRecipientAddressText());
+        if(shipment.getAddressCityName() != null){
+            detailsShipmentCity.setText(shipment.getAddressCityName());
+        }
+
+        if (shipment.getAddressAreaName() != null){
+            detailsShipmentArea.setText(shipment.getAddressAreaName());
+        }
+
+        if (shipment.getRecipientAddressText() != null){
+            detailsAddress.setText(shipment.getRecipientAddressText());
+        }
+
         //set location on map
         if(shipment.getAddressLatitude() != null && shipment.getAddressLongitude() != null){
+            shipmentDirections.setEnabled(true);
             double lat = shipment.getAddressLatitude();
             double lng = shipment.getAddressLongitude();
             initMap(lat, lng);
@@ -276,9 +297,7 @@ public class OrderDetailsFragment extends Fragment {
         if(shipment.getMobile() != null){
             detailsFirstNumber.setText(shipment.getMobile());
         }
-        if(shipment.getRecipientMobile() != null){
-            detailsSecondNumber.setText(shipment.getRecipientMobile());
-        }
+
 
         //set shipment number
         shipmentNumber.setText(shipment.getTrackNumber());
@@ -304,6 +323,7 @@ public class OrderDetailsFragment extends Fragment {
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.setCancelable(true);
+        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         alertDialog.show();
 
         acceptDelivering.setOnClickListener(new View.OnClickListener() {
@@ -337,7 +357,9 @@ public class OrderDetailsFragment extends Fragment {
 
         final AlertDialog reasonAlertDialog = dialogBuilder.create();
         reasonAlertDialog.setCancelable(true);
+        reasonAlertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         reasonAlertDialog.show();
+
 
         cancleRejected.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -390,7 +412,7 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     @OnClick({R.id.shipment_under_wating, R.id.shipment_rejected, R.id.call_first_contact,
-            R.id.call_second_contact,R.id.shipment_directions,R.id.shipment_delivered})
+            R.id.shipment_directions,R.id.shipment_delivered})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.shipment_under_wating:
@@ -413,12 +435,7 @@ public class OrderDetailsFragment extends Fragment {
                 }
 
                 break;
-            case R.id.call_second_contact:
-                if (!detailsSecondNumber.getText().toString().equalsIgnoreCase("")) {
-                    String uri = "tel:" + detailsSecondNumber.getText().toString();
-                    callShipmentClient(uri);
-                }
-                break;
+
             case R.id.shipment_directions:
                 if(shipment.getAddressLatitude() != null && shipment.getAddressLongitude() != null) {
                     double lat = shipment.getAddressLatitude();

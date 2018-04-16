@@ -40,7 +40,7 @@ public class LoginFragment extends Fragment {
     Unbinder unbinder;
     private IHttpService iHttpService;
     String mobileNumber,password;
-    public static LoginFragment newInstance(String param1, String param2) {
+    public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
 

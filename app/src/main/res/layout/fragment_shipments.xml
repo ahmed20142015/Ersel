@@ -139,13 +139,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/shipments_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="vertical"
-        />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/shipments_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="vertical" />
         <ProgressBar
             android:id="@+id/shipments_progress"
             android:layout_width="@dimen/_50sdp"

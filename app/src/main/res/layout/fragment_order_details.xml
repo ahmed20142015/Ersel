@@ -208,7 +208,8 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:paddingRight="@dimen/_4sdp"
                     android:paddingLeft="@dimen/_4sdp"
-
+                    android:focusable="false"
+                    android:enabled="false"
                     />
             </LinearLayout>
 
@@ -283,60 +284,60 @@
                     />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
-                />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/_1sdp"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:layout_marginEnd="@dimen/_10sdp"-->
+                <!--android:layout_marginStart="@dimen/_10sdp"-->
+                <!--android:layout_marginTop="@dimen/_3sdp"-->
+                <!--android:layout_marginBottom="@dimen/_3sdp"-->
+                <!--/>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_gravity="right"
-                android:gravity="right"
-                >
-                <ImageView
-                    android:id="@+id/call_second_contact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_call_white_24dp"
-                    android:tint="@color/colorPrimary"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    />
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginBottom="@dimen/_10sdp"-->
+                <!--android:layout_marginTop="@dimen/_5sdp"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:gravity="right"-->
+                <!--&gt;-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/call_second_contact"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/ic_call_white_24dp"-->
+                    <!--android:tint="@color/colorPrimary"-->
+                    <!--android:layout_marginStart="@dimen/_10sdp"-->
+                    <!--android:layout_marginEnd="@dimen/_10sdp"-->
+                    <!--/>-->
 
-                <TextView
-                    android:id="@+id/details_second_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    Tool:text="0101548554"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:gravity="right"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="رقم التليفون :"
-                    android:textColor="#ababab"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:paddingRight="@dimen/_4sdp"
-                    />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/details_second_number"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--Tool:text="0101548554"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textSize="@dimen/_14sdp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_marginStart="@dimen/_5sdp"-->
+                    <!--android:layout_marginEnd="@dimen/_5sdp"-->
+                    <!--android:gravity="right"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="رقم التليفون :"-->
+                    <!--android:textColor="#ababab"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textSize="@dimen/_15sdp"-->
+                    <!--android:layout_marginStart="@dimen/_5sdp"-->
+                    <!--android:layout_marginEnd="@dimen/_5sdp"-->
+                    <!--android:paddingRight="@dimen/_4sdp"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
         </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -651,7 +652,6 @@
             fab:menu_colorNormal="@color/colorPrimary"
             fab:menu_colorPressed="#3ECBF7"
             fab:menu_colorRipple="#99d4d4d4"
-            fab:menu_fab_label="تغيير حالة الشحنة"
             fab:menu_fab_size="normal"
             fab:menu_icon="@drawable/ic_add_white_24dp"
             fab:menu_labels_colorNormal="#333"
@@ -705,7 +705,7 @@
                 android:id="@+id/shipment_delivered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/delivered"
+                android:src="@drawable/accepted"
                 fab:fab_label="تم التوصيل"
                 fab:fab_size="mini"
                 style="@style/Green"
