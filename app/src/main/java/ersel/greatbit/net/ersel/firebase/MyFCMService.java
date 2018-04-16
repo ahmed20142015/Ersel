@@ -27,7 +27,7 @@ public class MyFCMService extends FirebaseMessagingService {
         String title = remoteMessage.getData().get("title");
         String message = remoteMessage.getData().get("message");
 
-        sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("message"));
+        sendNotification(title, message);
 
     }
 
