@@ -240,7 +240,6 @@ public class OrderDetailsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ShipmentDetails> call, Throwable t) {
-                Toast.makeText(getActivity(), "faill", Toast.LENGTH_SHORT).show();
                 if (detailsProgress != null)
                 detailsProgress.setVisibility(View.GONE);
             }
@@ -313,34 +312,40 @@ public class OrderDetailsFragment extends Fragment {
 
     @OnClick(R.id.start_delivered_shipment)
     public void onViewClicked() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View dialogView = inflater.inflate(R.layout.confirm_delivering_dialog, null);
-        dialogBuilder.setView(dialogView);
+        if (!SharedPrefManager.getInstance(getActivity()).getDelivering()){
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View dialogView = inflater.inflate(R.layout.confirm_delivering_dialog, null);
+            dialogBuilder.setView(dialogView);
 
-        Button acceptDelivering = dialogView.findViewById(R.id.accept_delivering);
-        Button cancleDelivering = dialogView.findViewById(R.id.cancle_delivering);
+            Button acceptDelivering = dialogView.findViewById(R.id.accept_delivering);
+            Button cancleDelivering = dialogView.findViewById(R.id.cancle_delivering);
 
-        final AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.setCancelable(true);
-        alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        alertDialog.show();
+            final AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.setCancelable(true);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            alertDialog.show();
 
-        acceptDelivering.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newStatus = 2;
-                updateStatus();
-                alertDialog.dismiss();
-            }
-        });
+            acceptDelivering.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    newStatus = 2;
+                    updateStatus();
+                    alertDialog.dismiss();
+                }
+            });
 
-        cancleDelivering.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialog.dismiss();
-            }
-        });
+            cancleDelivering.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+
+        }
+        else
+            Toast.makeText(getActivity(), "يرجي إنهاء الشحنة الجاري توصيلها", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -399,7 +404,6 @@ public class OrderDetailsFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<BaseResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
                 }
             });
 

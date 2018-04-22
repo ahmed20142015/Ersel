@@ -11,9 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 
@@ -52,6 +57,8 @@ public class ShipmentsFragment extends Fragment {
     CardView cardShipmentDetails;
     @BindView(R.id.green_light)
     CircleImageView greenLight;
+
+
     Unbinder unbinder;
 
     private IHttpService iHttpService;
@@ -96,6 +103,7 @@ public class ShipmentsFragment extends Fragment {
         shipmentsList.setItemAnimator(new DefaultItemAnimator());
         adapter = new ShipmentAdapter(getActivity(), shipments);
         if (ConnectionDetector.getInstance(getActivity()).isConnectingToInternet()) {
+
             getShipments();
             getDeliveringShipments();
         } else
@@ -160,8 +168,8 @@ public class ShipmentsFragment extends Fragment {
                         shipmentsProgress.setVisibility(View.GONE);
                         refreshLayout.setRefreshing(false);
                     }
-               //     Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                }
+
+                 }
 
 
             }
@@ -172,7 +180,7 @@ public class ShipmentsFragment extends Fragment {
                     shipmentsProgress.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
                 }
-                Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -195,6 +203,7 @@ public class ShipmentsFragment extends Fragment {
                             deliveringShipments.setText("جاري تسليم شحنة :");
                             cardShipmentClientName.setText(deliveringShipmentItem.get(0).getClientName());
                             cardShipmentAddress.setText(deliveringShipmentItem.get(0).getAddressText());
+                            SharedPrefManager.getInstance(getActivity()).setDelivering(true);
                         }
 
                     } else {
@@ -202,19 +211,19 @@ public class ShipmentsFragment extends Fragment {
                             deliveringShipments.setText("لا يوجد شحنات جاري تسليمها ...");
                             greenLight.setImageResource(R.color.red);
                             cardShipmentDetails.setVisibility(View.GONE);
+                            SharedPrefManager.getInstance(getActivity()).setDelivering(false);
                         }
 
                     }
 
-                } //else
-//                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
 
             @Override
             public void onFailure(Call<GetShipments> call, Throwable t) {
-                Toast.makeText(getActivity(), "Faill", Toast.LENGTH_SHORT).show();
+
             }
         });
 

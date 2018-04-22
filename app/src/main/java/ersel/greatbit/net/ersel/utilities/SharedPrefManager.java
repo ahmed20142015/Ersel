@@ -77,5 +77,15 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void setDelivering(boolean delivering){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("deliveringkey",delivering);
+        editor.apply();
+    }
+
+    public boolean getDelivering(){
+        return sharedPref.getBoolean("deliveringkey",false);
+    }
+
 
 }

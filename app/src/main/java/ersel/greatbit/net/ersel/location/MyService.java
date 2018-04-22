@@ -175,7 +175,6 @@ public class MyService extends Service
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(MyService.this, "Faill", Toast.LENGTH_SHORT).show();
             }
         });
 

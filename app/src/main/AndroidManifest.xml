@@ -29,7 +29,7 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAEa90GpGfLvdO43tc-YbRCSGeAzGxXsnM" />
+            android:value="AIzaSyB1ie28qfrjinnW2CdOb0qPqy0AvmMfRG4" />
         <service
             android:name=".location.LocationUpdateService"
             android:enabled="true"
